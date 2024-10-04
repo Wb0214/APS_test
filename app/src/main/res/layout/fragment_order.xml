@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.scheduleResult.resultFragment.OrderFragment">
+
+    <LinearLayout
+        android:id="@+id/order_theme_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="0.1"
+            android:background="@drawable/underline_dashed">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@drawable/right_dashed"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@drawable/left_dashed"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@drawable/right_dashed"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingHorizontal="3dp">
+
+                <TextView
+                    android:id="@+id/order_mainCompany_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.13"
+                    android:gravity="center"
+                    android:text="公司"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:background="@drawable/underline"
+                    android:layout_weight="0.15">
+
+                    <TextView
+                        android:id="@+id/order_mainManufacture_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.13"
+                        android:layout_gravity="center"
+                        android:text="製造"
+                        android:background="@drawable/double_line"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.11"
+                    android:background="@drawable/underline">
+
+                    <TextView
+                        android:id="@+id/order_mainDay_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.6"
+                        android:gravity="left|center"
+                        android:text="列印日期: 2018/12/19"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/order_mainPag_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:gravity="right|center"
+                        android:text="頁次: 1/1"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/order_TwoMainData_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.91"
+                            android:gravity="left|center"
+                            android:text="訂購日期: 2018/11/27"
+                            android:textSize="10sp"/>
+
+                        <TextView
+                            android:id="@+id/order_TwoMainNu_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="left|center"
+                            android:text="單據號碼:"
+                            android:textSize="10sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/order_CustomterName_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.48"
+                            android:gravity="left|center"
+                            android:text="客戶名稱: (M1315)"
+                            android:textSize="10sp"/>
+
+                        <TextView
+                            android:id="@+id/order_company_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:gravity="left|center"
+                            android:text="MATADOR"
+                            android:textSize="10sp"/>
+
+                        <TextView
+                            android:id="@+id/order_CustomterOrder_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.39"
+                            android:gravity="left|center"
+                            android:text="客戶訂單:"
+                            android:textSize="10sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal"
+                        android:background="@drawable/underline">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.91"
+                            android:gravity="left|center"
+                            android:text=""
+                            android:textSize="12sp"/>
+
+
+                        <TextView
+                            android:id="@+id/order_people_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="left|center"
+                            android:text="業務人員:"
+                            android:textSize="10sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.14"
+                    android:orientation="horizontal"
+                    android:background="#DCDBDB">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/underline">
+
+                        <TextView
+                            android:id="@+id/order_thirdMainL_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:textStyle="bold"
+                            android:layout_weight="0.5"
+                            android:gravity="left|center"
+                            android:text="序號 產品編號/客戶編號"
+                            android:textSize="11sp"
+                            android:background="@drawable/double_line"/>
+
+                        <TextView
+                            android:id="@+id/order_thirdMainC_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.8"
+                            android:gravity="left|center"
+                            android:textStyle="bold"
+                            android:text="品名規格"
+                            android:background="@drawable/double_line"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/order_quantity_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.2"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="數量"
+                            android:background="@drawable/double_line"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/order_unit_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.2"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="單位"
+                            android:background="@drawable/double_line"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/order_NotUse_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="未出數量"
+                            android:background="@drawable/double_line"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/order_dayTime_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="預交日期"
+                            android:background="@drawable/double_line"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/order_MainNum1_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@drawable/left_dashed"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

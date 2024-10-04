@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.scheduleResult.resultFragment.BeforeFragment">
+
+    <LinearLayout
+        android:id="@+id/before_theme_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="0.1"
+            android:background="@drawable/underline_dashed">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@drawable/right_dashed"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@drawable/left_dashed"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@drawable/right_dashed"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingHorizontal="8dp">
+
+                <TextView
+                    android:id="@+id/before_mainCompany_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.13"
+                    android:gravity="center"
+                    android:text="明昌國際工業股份有限公司"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:background="@drawable/underline"
+                    android:layout_weight="0.15"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/before_mainManufacture_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.13"
+                        android:background="@drawable/double_line"
+                        android:gravity="center"
+                        android:text="廠內製造命令(一群-大馬)"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.12"
+                    android:background="@drawable/underline">
+
+                    <TextView
+                        android:id="@+id/before_mainDay_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.6"
+                        android:gravity="left|center"
+                        android:text="列印日期: 2018/12/19"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/before_mainFrom_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:gravity="left|center"
+                        android:text="來源訂單:1S01811270009"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/before_mainPag_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:gravity="right|center"
+                        android:text="頁次: 1/1"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/before_TwoMainData_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.35"
+                            android:gravity="left|center"
+                            android:text="製令日期: 2018/12/04"
+                            android:textSize="10sp"/>
+
+                        <TextView
+                            android:id="@+id/before_TwoMainNum_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:gravity="left|center"
+                            android:text="製令單號: 1MO1812040071"
+                            android:textSize="10sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.8"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/before_TwoMainMaster_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.48"
+                            android:gravity="left|center"
+                            android:text="母件編號: M1-ATN260011-1"
+                            android:textSize="10sp"/>
+
+                            <TextView
+                                android:id="@+id/before_TwoMainName_tv"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.7"
+                                android:gravity="left|center"
+                                android:text="母件單品:ATN260011 垃圾桶系統櫃門片 "
+                                android:textSize="10sp"/>
+
+                        <TextView
+                            android:id="@+id/before_StartTime_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.35"
+                            android:gravity="left|center"
+                            android:text="預開工日: 2019/01/11"
+                            android:textSize="10sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal"
+                        android:background="@drawable/underline">
+
+                        <TextView
+                            android:id="@+id/before_TwoMainQuantity_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.2"
+                            android:gravity="left|center"
+                            android:text="生產數量: 3.00"
+                            android:textSize="10sp"/>
+
+                        <TextView
+                            android:id="@+id/before_TwoMain_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.7"
+                            android:gravity="left|center"
+                            android:text="PCS"
+                            android:textSize="10sp"/>
+
+                        <TextView
+                            android:id="@+id/before_EndTime_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.27"
+                            android:gravity="left|center"
+                            android:text="預完工日: 2019/01/11"
+                            android:textSize="10sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:orientation="horizontal"
+                    android:background="@drawable/underline">
+
+                    <TextView
+                        android:id="@+id/before_thirdMain_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textStyle="bold"
+                        android:layout_weight="0.21"
+                        android:gravity="left|center"
+                        android:text="序號  材料編號"
+                        android:textSize="11sp"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/before_thirdMainTwoUp1_tv"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.1"
+                                android:gravity="center"
+                                android:textStyle="bold"
+                                android:text="品名規格"
+                                android:textSize="11sp"
+                                android:background="@drawable/underline"/>
+
+                            <TextView
+                                android:id="@+id/before_thirdMainTwoUp2_tv"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.8"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:text="單位用量  需領用量  單位"
+                                android:textSize="11sp"
+                                android:background="@drawable/underline"/>
+
+                            <TextView
+                                android:id="@+id/before_thirdMainTwoUp3_tv"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:text="儲位"
+                                android:textSize="11sp"
+                                android:background="@drawable/underline"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/before_thirdMainTwoDown_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="產品說明"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/before_list_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@drawable/left_dashed"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
