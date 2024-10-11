@@ -14,7 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.aps_test.R;
+
+import com.example.APS_test.R;
 import com.example.aps_test.ui.second.production.firstsearch.FirstSearchActivity;
 import com.example.aps_test.ui.second.production.firstsearch.search_schedule.SearchScheduleActivity;
 import com.example.aps_test.ui.second.production.setup.SetupActivity;

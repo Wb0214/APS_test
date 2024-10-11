@@ -18,7 +18,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.aps_test.R;
+import com.example.APS_test.R;
 import com.example.aps_test.ui.second.production.firstsearch.search_schedule.SearchScheduleActivity;
 
 import java.util.Calendar;

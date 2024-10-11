@@ -11,16 +11,17 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.aps_test.R;
+import com.example.APS_test.R;
+import com.example.aps_test.sharedPreferences.SP;
 import com.example.aps_test.ui.second.SecondActivity;
 
 public class MainActivity extends AppCompatActivity implements MainContract.view{
-
     private EditText accountEditText,passwordEditText;
     private Button LogInButton;
 
     private Context context = this;
     private MainPresenter mainpresenter;
+    private SP sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.view
         passwordEditText = findViewById(R.id.main_password_et);
         LogInButton = findViewById(R.id.main_LogIn_btn);
 
-        mainpresenter = new MainPresenter(this);
+        mainpresenter = new MainPresenter(this,this);
+        sp = new SP(this);
 
         //登入按鈕
         LogInButton.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +48,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.view
     @Override
     public void isError(String s){
         Toast.makeText(context,s,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void GetToken(){
+        mainpresenter.getToken(accountEditText.getText().toString(),passwordEditText.getText().toString());
+        //mainpresenter.getLoginData(sp.loadToken());
     }
 
     @Override

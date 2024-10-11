@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aps_test.R;
+
+import com.example.APS_test.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

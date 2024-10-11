@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.aps_test.R;
+import com.example.APS_test.R;
 
 public class BeforeFragment extends Fragment {
     private Context context;

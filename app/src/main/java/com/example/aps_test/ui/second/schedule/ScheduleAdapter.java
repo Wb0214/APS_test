@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aps_test.R;
+import com.example.APS_test.R;
 import com.example.aps_test.ui.scheduleResult.ScheduleResultActivity;
 
 import java.util.ArrayList;

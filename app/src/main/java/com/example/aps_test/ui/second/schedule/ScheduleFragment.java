@@ -15,7 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.aps_test.R;
+
+import com.example.APS_test.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

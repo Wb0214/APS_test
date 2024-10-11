@@ -13,7 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.aps_test.R;
+import com.example.APS_test.R;
+
 
 public class SetupActivity extends AppCompatActivity {
 

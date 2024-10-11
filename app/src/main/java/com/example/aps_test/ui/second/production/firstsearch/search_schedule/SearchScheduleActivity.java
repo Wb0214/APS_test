@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.aps_test.R;
+
+import com.example.APS_test.R;
 import com.example.aps_test.ui.second.schedule.ScheduleAdapter;
 
 import java.util.ArrayList;
