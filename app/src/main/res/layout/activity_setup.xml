@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.second.production.setup.SetupActivity">
+    tools:context="com.example.aps_test.ui.second.production.setup.SetupActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="4"
+        android:layout_weight="3.8"
         android:orientation="horizontal"
         android:background="#000000"
         android:gravity="center_vertical"

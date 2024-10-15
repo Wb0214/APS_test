@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.scheduleResult.ScheduleResultActivity">
+    tools:context="com.example.aps_test.ui.scheduleResult.ScheduleResultActivity">
 
     <LinearLayout
         android:id="@+id/CheckResult_top_ll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.13"
+        android:layout_weight="0.15"
         android:orientation="horizontal"
         android:background="@color/black">
 

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.APS_test.R;
+import com.example.aps_test.sharedPreferences.SP;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -24,8 +25,9 @@ public class SecondActivity extends AppCompatActivity implements SecondContract.
     private TabLayout themeTabLayout;
     private String[] title= {"生產排程","當日進度表","訊息通知"};
     private Context context = this;
+    private SP sp;
 
-    private Button setupButton;
+    private TextView NameTextView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,8 +41,9 @@ public class SecondActivity extends AppCompatActivity implements SecondContract.
 
         viewViewPager = findViewById(R.id.second_view_vp);
         themeTabLayout = findViewById(R.id.second_theme_tl);
-
-        setupButton = findViewById(R.id.prodcution_SetUp_btn);
+        NameTextView = findViewById(R.id.second_name_tv);
+        sp = new SP(this);
+        NameTextView.setText(sp.loadName());
 
         viewViewPager.setAdapter(new ViewPagerAdapter(this, this));
         new TabLayoutMediator(themeTabLayout, viewViewPager, true, new TabLayoutMediator.TabConfigurationStrategy() {
@@ -52,11 +55,4 @@ public class SecondActivity extends AppCompatActivity implements SecondContract.
         }).attach();
 
     }
-
-//    @Override
-//    public void sample() {
-//        TableLayout tableLayout = new TableLayout(this);
-//        tableLayout.setColumnCollapsed(1, false);
-//        tableLayout.setColumnCollapsed(2, false);
-//    }
 }

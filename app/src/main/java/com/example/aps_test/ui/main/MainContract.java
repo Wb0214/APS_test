@@ -3,7 +3,8 @@ package com.example.aps_test.ui.main;
 public interface MainContract {
     interface view{
         void isError(String s);
-        void GetToken();
+        void AcconutTrue(String account);
+        void GetLoginData();
         void correct();
     }
 

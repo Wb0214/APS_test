@@ -1,7 +1,10 @@
 package com.example.aps_test.api;
 
+import com.example.aps_test.api.request.DataResponse;
 import com.example.aps_test.api.request.LoginDataResponse;
 import com.example.aps_test.api.request.LoginResponse;
+
+import java.util.List;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Response;
@@ -19,6 +22,12 @@ public interface ApiService {
 
     @GET("auth/")
     Observable<LoginDataResponse> getLoginData(
+            @Query("token") String token
+    );
+
+    @GET("app-search-customer")
+    Observable<Response<List<DataResponse>>> getCustomer(
+            @Query("customer_name") String customer_name,
             @Query("token") String token
     );
 

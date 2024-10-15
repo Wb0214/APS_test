@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.APS_test.R;
+import com.example.aps_test.sharedPreferences.SP;
 import com.example.aps_test.ui.scheduleResult.resultFragment.ResultViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -22,12 +23,13 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
     private ImageView backImageView,leftImageView,rightImageView;
     private TextView themeTextView,searialNum1TextView,searialNum2TextView,companyNumTextView,
             thingTextView,onlineTimeTextView,quantityTextView,startTimeTextView,
-            finishTimeTextView,jobTextView,stateTextView;
+            finishTimeTextView,jobTextView,stateTextView,NameTextView;
     private ViewPager2 viewViewPager;
     private TabLayout themeTabLayout;
     private ScheduleResultPresenter scheduleResultPresenter;
 
     private Context context= this;
+    private SP sp;
 
     private String[] title= {"前關製令","本階製令","後關製令","裝配製令","銷售訂單"};
     private String[] theme= {"當日進度表","進度表查詢"};
@@ -48,6 +50,7 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
         themeTabLayout = findViewById(R.id.searchResult_theme_tl);
         backImageView = findViewById(R.id.searchResult_back_iv);
         themeTextView = findViewById(R.id.searchResult_themename_tv);
+        NameTextView = findViewById(R.id.searchResult_name_tv);
 
         searialNum1TextView = findViewById(R.id.searchResult_searialNum1_tv);
         searialNum2TextView = findViewById(R.id.searchResult_searialNum2_tv);
@@ -66,6 +69,8 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
         themeTextView.setText(theme[i]);
 
         scheduleResultPresenter = new ScheduleResultPresenter(this);
+        sp = new SP(context);
+        NameTextView.setText(sp.loadName());
 
         viewViewPager.setAdapter(new ResultViewPagerAdapter(this, this));
         viewViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

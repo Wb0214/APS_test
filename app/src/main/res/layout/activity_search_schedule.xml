@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.second.production.firstsearch.search_schedule.SearchScheduleActivity">
+    tools:context="com.example.aps_test.ui.second.production.firstsearch.search_schedule.SearchScheduleActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

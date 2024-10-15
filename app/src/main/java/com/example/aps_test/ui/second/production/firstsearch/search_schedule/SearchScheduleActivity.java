@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.example.APS_test.R;
+import com.example.aps_test.sharedPreferences.SP;
 import com.example.aps_test.ui.second.schedule.ScheduleAdapter;
 
 import java.util.ArrayList;
@@ -26,9 +27,10 @@ public class SearchScheduleActivity extends AppCompatActivity implements SearchS
 
     private RecyclerView searchSchedulerecyclerView;
     SearchScheduleAdapter searchScheduleAdapter;
-    private TextView topthemeTextView;
+    private TextView NameTextView;
     private ImageView backImageView;
     private SearchSchedulePresenter searchSchedulePresenter;
+    private SP sp;
 
     ArrayList<HashMap<String, String>> marrayList = new ArrayList<>();
     int Sum;
@@ -40,9 +42,11 @@ public class SearchScheduleActivity extends AppCompatActivity implements SearchS
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_search_schedule);
 
-        topthemeTextView = findViewById(R.id.searchSchedule_Toptheme2_tv);
         backImageView = findViewById(R.id.searchSchedule_back_iv);
         searchSchedulerecyclerView = findViewById(R.id.searchSchedule_list_rv);
+        NameTextView = findViewById(R.id.searchSchedule_name_tv);
+        sp = new SP(this);
+        NameTextView.setText(sp.loadName());
 
         Intent intent = getIntent();
 

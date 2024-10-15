@@ -1,9 +1,11 @@
 package com.example.aps_test.ui.second.production.firstsearch;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,19 +21,25 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.APS_test.R;
+import com.example.aps_test.sharedPreferences.SP;
 import com.example.aps_test.ui.second.production.firstsearch.search_schedule.SearchScheduleActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class FirstSearchActivity extends AppCompatActivity implements FirstSearchContract.view{
     private Button searchButton;;
     private ImageView backButton;
-    private TextView dot1TextView,dot2TextView,dot3TextView;
+    private TextView dot1TextView,dot2TextView,dot3TextView,NameTextView;
     private EditText dataEditText, numEditText, personEditText;
     private Spinner listSpinner;
+    private SP sp;
+    private Context context = this;
 
     private FirstSearchPresenter firstSearchPresenter;
-
+    private String[] items ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +57,12 @@ public class FirstSearchActivity extends AppCompatActivity implements FirstSearc
         numEditText = findViewById(R.id.firstsearch_num_et);
         personEditText = findViewById(R.id.firstsearch_person_et);
         listSpinner = findViewById(R.id.firstsearch_list_sp);
+        NameTextView = findViewById(R.id.firstsearch_name_tv);
 
-        firstSearchPresenter =  new FirstSearchPresenter(this);
+        sp = new SP(this);
+        NameTextView.setText(sp.loadName());
+
+        firstSearchPresenter =  new FirstSearchPresenter(this,this);
         //返回
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,46 +106,63 @@ public class FirstSearchActivity extends AppCompatActivity implements FirstSearc
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             final EditText editText = new EditText(this);
             dialog.setTitle("輸入單號");
-            dialog.setView(editText);
+            //設置列表字串文字
+            String[] items = {"列表1", "列表2", "列表3", "列表4","列表5"};
+
+            // 設置item點擊事件處理
+            dialog.setItems(items, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Toast.makeText(context, "你選擇" + items[i], Toast.LENGTH_SHORT).show();
+                }
+            });
 
             //設置左邊按鈕和點擊事件
             dialog.setNegativeButton("關閉", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     // TODO: ...
-                }
-            });
-            //設置右邊按鈕和點擊事件
-            dialog.setPositiveButton("確定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // TODO: ...
-                    numEditText.setText(editText.getText().toString());
                 }
             });
             //顯示Dialog
             dialog.show();
         });
 
-        //輸入客戶
+        dot3TextView.setOnClickListener((v) -> {
+            Get_customer_name(personEditText.getText().toString());
+
+        });
+    }
+
+    @Override
+    public void Get_customer_name(String person){
+        Log.e("PERPP",person);
+        firstSearchPresenter.Get_customerName(person,sp.loadToken());
+    }
+
+    @Override
+    public void customer_name(String[] customerNames){
+        Log.d("tag", "customer_name: "+customerNames);
+        items = customerNames;
+
         dot3TextView.setOnClickListener((v) -> {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             final EditText editText2 = new EditText(this);
             dialog.setTitle("輸入客戶");
-            dialog.setView(editText2);
+            //設置列表字串文字
+            customer_name(items);
+            // 設置item點擊事件處理
+            dialog.setItems(items, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Toast.makeText(context, "你選擇" + items[i], Toast.LENGTH_SHORT).show();
+                }
+            });
             //設置左邊按鈕和點擊事件
             dialog.setNegativeButton("關閉", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     // TODO: ...
-                }
-            });
-            //設置右邊按鈕和點擊事件
-            dialog.setPositiveButton("確定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // TODO: ...
-                    personEditText.setText(editText2.getText().toString());
                 }
             });
             //顯示Dialog

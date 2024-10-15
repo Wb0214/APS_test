@@ -38,8 +38,8 @@ public class MainPresenter implements MainContract.mainpresenter{
     @Override
     public void getData(String account,String password) {
         boolean gDBefore = getDataBefore(account,password);
-        if(gDBefore){
-            callBake.GetToken();
+        if(gDBefore && (account.equals("e1001")) && (password.equals("e1001"))){
+            callBake.correct();
         }
         else {
             callBake.isError(str);
@@ -49,7 +49,7 @@ public class MainPresenter implements MainContract.mainpresenter{
     private boolean getDataBefore(String account,String password){
         boolean isEmpty = isEmpty(account) || isEmpty(password);
         if(isEmpty){
-            str = "輸入不為空白";
+            str = "輸入錯誤";
             return false;
         }
         return true;
@@ -67,11 +67,12 @@ public class MainPresenter implements MainContract.mainpresenter{
                 .subscribe(new DisposableObserver<Response<LoginResponse>>() {
                     @Override
                     public void onNext(@NonNull Response<LoginResponse> loginResponse) {
-                        if(loginResponse.body().gettoken() != null){
+                        if(account.equals("e1001") && password.equals("e1001")){
                             sp.saveToken(loginResponse.body().gettoken());
                             Log.d("TAG", "onNext: "+loginResponse.body().gettoken());
+                            callBake.GetLoginData();
                         }
-                        callBake.correct();
+                        else callBake.isError("帳密錯誤");
                     }
 
                     @Override
@@ -91,12 +92,16 @@ public class MainPresenter implements MainContract.mainpresenter{
         apiService.getLoginData(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<LoginDataResponse>() {
+                .subscribe(new DisposableObserver<LoginDataResponse>() {
                     @Override
                     public void onNext(@NonNull LoginDataResponse loginDataResponse) {
-                        if (sp.loadToken() != null) {
+                        if (sp.loadToken() == token) {
                             String account = loginDataResponse.getAccount();
+
                             String name = loginDataResponse.getName();
+                            sp.saveName(name);
+
+                            callBake.AcconutTrue(account);
                         }
                     }
 

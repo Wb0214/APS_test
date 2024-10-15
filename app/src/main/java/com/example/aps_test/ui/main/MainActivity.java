@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.view
         LogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainpresenter.getData(accountEditText.getText().toString(),passwordEditText.getText().toString());
+                mainpresenter.getToken(accountEditText.getText().toString(),passwordEditText.getText().toString());
             }
         });
     }
@@ -51,9 +51,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.view
     }
 
     @Override
-    public void GetToken(){
-        mainpresenter.getToken(accountEditText.getText().toString(),passwordEditText.getText().toString());
-        //mainpresenter.getLoginData(sp.loadToken());
+    public void AcconutTrue(String account){
+        mainpresenter.getData(account,passwordEditText.getText().toString());
+    }
+
+    @Override
+    public void GetLoginData(){
+        mainpresenter.getLoginData(sp.loadToken());
     }
 
     @Override
