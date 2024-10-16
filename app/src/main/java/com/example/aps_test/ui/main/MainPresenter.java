@@ -69,7 +69,7 @@ public class MainPresenter implements MainContract.mainpresenter{
                     public void onNext(@NonNull Response<LoginResponse> loginResponse) {
                         if(account.equals("e1001") && password.equals("e1001")){
                             sp.saveToken(loginResponse.body().gettoken());
-                            Log.d("TAG", "onNext: "+loginResponse.body().gettoken());
+                            Log.d("getToken", "onNext: "+loginResponse.body().gettoken());
                             callBake.GetLoginData();
                         }
                         else callBake.isError("帳密錯誤");
@@ -77,12 +77,12 @@ public class MainPresenter implements MainContract.mainpresenter{
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("test", "onError: ");
+                        Log.d("getToken", "onError: " + e.getMessage());
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.d("test", "onComplete: ");
+                        Log.d("getToken", "onComplete");
                     }
                 });
     }
@@ -107,12 +107,12 @@ public class MainPresenter implements MainContract.mainpresenter{
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("test", "onError: ");
+                        Log.d("getLoginData", "onError: " + e.getMessage());
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.d("test", "onComplete: ");
+                        Log.d("getLoginData", "onComplete");
                     }
                 });
     }

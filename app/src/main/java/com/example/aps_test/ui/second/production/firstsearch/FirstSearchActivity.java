@@ -39,7 +39,8 @@ public class FirstSearchActivity extends AppCompatActivity implements FirstSearc
     private Context context = this;
 
     private FirstSearchPresenter firstSearchPresenter;
-    private String[] items ;
+    String[] customerName,soId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +62,9 @@ public class FirstSearchActivity extends AppCompatActivity implements FirstSearc
 
         sp = new SP(this);
         NameTextView.setText(sp.loadName());
-
         firstSearchPresenter =  new FirstSearchPresenter(this,this);
+
+
         //返回
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,88 +87,111 @@ public class FirstSearchActivity extends AppCompatActivity implements FirstSearc
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_shape);
         listSpinner.setAdapter(adapter);
 
-        //dialog
         //日期
         dot1TextView.setOnClickListener((v) -> {
-            Calendar calendar = Calendar.getInstance();
-            DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-                // 當日期選擇完畢並按下"OK"按鈕 的事件觸發處理
-                @Override
-                public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-                    StringBuilder result = new StringBuilder();
-                    result.append(y).append("-").append(m+1).append("-").append(d);
-                    dataEditText.setText(result);
-                }
-            },calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-            dialog.show();
+            Date();
         });
 
-        //輸入單號
-        dot2TextView.setOnClickListener((v) -> {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            final EditText editText = new EditText(this);
-            dialog.setTitle("輸入單號");
-            //設置列表字串文字
-            String[] items = {"列表1", "列表2", "列表3", "列表4","列表5"};
-
-            // 設置item點擊事件處理
-            dialog.setItems(items, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Toast.makeText(context, "你選擇" + items[i], Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            //設置左邊按鈕和點擊事件
-            dialog.setNegativeButton("關閉", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // TODO: ...
-                }
-            });
-            //顯示Dialog
-            dialog.show();
+        //so_id
+        dot2TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Get_so_id(numEditText.getText().toString());
+            }
         });
 
-        dot3TextView.setOnClickListener((v) -> {
-            Get_customer_name(personEditText.getText().toString());
-
+        //customer_name
+        dot3TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Get_customer_name(personEditText.getText().toString());
+            }
         });
+
+    }
+/////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public void Date(){
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            // 當日期選擇完畢並按下"OK"按鈕 的事件觸發處理
+            @Override
+            public void onDateSet(DatePicker datePicker, int y, int m, int d) {
+                StringBuilder result = new StringBuilder();
+                result.append(y).append("-").append(m+1).append("-").append(d);
+                dataEditText.setText(result);
+            }
+        },calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        dialog.show();
     }
 
+////////////////////////////////////////////////////////////////////////////////////
+    //customer_name
     @Override
     public void Get_customer_name(String person){
-        Log.e("PERPP",person);
+        Log.d("tag", "Get_customer_name: "+person);
         firstSearchPresenter.Get_customerName(person,sp.loadToken());
     }
-
     @Override
     public void customer_name(String[] customerNames){
         Log.d("tag", "customer_name: "+customerNames);
-        items = customerNames;
+        showCustomerName(customerNames);
+    }
+    @Override
+    public void showCustomerName(String[] customerNames){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("客戶名稱");
+        customerName = customerNames;
 
-        dot3TextView.setOnClickListener((v) -> {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            final EditText editText2 = new EditText(this);
-            dialog.setTitle("輸入客戶");
-            //設置列表字串文字
-            customer_name(items);
-            // 設置item點擊事件處理
-            dialog.setItems(items, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Toast.makeText(context, "你選擇" + items[i], Toast.LENGTH_SHORT).show();
-                }
-            });
-            //設置左邊按鈕和點擊事件
-            dialog.setNegativeButton("關閉", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // TODO: ...
-                }
-            });
-            //顯示Dialog
-            dialog.show();
+        // 設置item點擊事件處理
+        dialog.setItems(customerName, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                personEditText.setText(customerName[i]);
+            }
         });
+        //設置左邊按鈕和點擊事件
+        dialog.setNegativeButton("關閉", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // TODO: ...
+            }
+        });
+        //顯示Dialog
+        dialog.show();
+    }
+/////////////////////////////////////////////////////////////////////////////////////////
+    //so_id
+    @Override
+    public void Get_so_id(String id) {
+        firstSearchPresenter.Get_soId(id, sp.loadToken());
+    }
+    @Override
+    public void so_id(String[] so_id){
+        Log.d("tag", "so_id: "+so_id);
+        showSoId(so_id);
+    }
+    @Override
+    public void showSoId(String[] so_id){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("訂單單號");
+
+        soId = so_id;
+        // 設置item點擊事件處理
+        dialog.setItems(soId, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                numEditText.setText(soId[i]);
+            }
+        });
+        //設置左邊按鈕和點擊事件
+        dialog.setNegativeButton("關閉", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // TODO: ...
+            }
+        });
+        //顯示Dialog
+        dialog.show();
     }
 }

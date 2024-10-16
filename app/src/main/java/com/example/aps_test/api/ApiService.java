@@ -1,6 +1,7 @@
 package com.example.aps_test.api;
 
-import com.example.aps_test.api.request.DataResponse;
+import com.example.aps_test.api.request.DataCustomerResponse;
+import com.example.aps_test.api.request.DataSoIdResponse;
 import com.example.aps_test.api.request.LoginDataResponse;
 import com.example.aps_test.api.request.LoginResponse;
 
@@ -26,9 +27,16 @@ public interface ApiService {
     );
 
     @GET("app-search-customer")
-    Observable<Response<List<DataResponse>>> getCustomer(
+    Observable<Response<List<DataCustomerResponse>>> getCustomer(
             @Query("customer_name") String customer_name,
             @Query("token") String token
     );
+
+    @GET("app-search-so")
+    Observable<Response<List<DataSoIdResponse>>> getOrder(
+            @Query("so_id") String so_id,
+            @Query("token") String token
+    );
+
 
 }
