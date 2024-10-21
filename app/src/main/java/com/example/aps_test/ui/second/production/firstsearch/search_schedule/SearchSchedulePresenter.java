@@ -1,59 +1,91 @@
 package com.example.aps_test.ui.second.production.firstsearch.search_schedule;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.example.aps_test.api.ApiClient;
+import com.example.aps_test.api.ApiService;
+import com.example.aps_test.api.request.MoResponse;
+import com.example.aps_test.sharedPreferences.SP;
 import com.example.aps_test.ui.second.schedule.ScheduleContract;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.Response;
 
 public class SearchSchedulePresenter implements SearchScheduleContract.searchSchedulepresenter{
     private SearchScheduleContract.view callback;
     ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();
-    final static String[] companyname = {"霹靂啪啦股份有限公司", "Ben10不變天公司"};
+    //final static String[] companyname = {"霹靂啪啦股份有限公司", "Ben10不變天公司"};
 
-    public SearchSchedulePresenter(SearchScheduleContract.view view){
+    private Context context;
+    private ApiClient apiClient;
+    private ApiService apiService;
+    private SP sp;
+
+    public SearchSchedulePresenter(SearchScheduleContract.view view, Context context){
         this.callback = view;
+        this.context = context;
+        this.apiClient = new ApiClient();
+        this.apiService = apiClient.LoginApi().create(ApiService.class);
+        this.sp = new SP(context);
     }
-
     @Override
-    public void Ans(){
-        int min=10,j=10;
-        //利用迴圈呼叫次將資料放入HashMap中
-        for (int i = 0; i < 11; i++)
-        {
-            HashMap<String, String> hashMap = new HashMap<>();
-            hashMap.put("Num", String.valueOf(i+1));
-            String companyName = companyname[new Random().nextInt(2)];
+    public void getData(String customerName, String soId, String token) {
+        apiService.getMfg(customerName,soId,token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<List<MoResponse>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
-            if(companyName == "霹靂啪啦股份有限公司"){
-                hashMap.put("Searial", String.format("1MO18120300")+String.valueOf(new Random().nextInt(99)));
-                hashMap.put("SearialNum", String.format("1SOA18113000")+String.valueOf(new Random().nextInt(99)));
-                hashMap.put("Company1", String.format("F10318M-") +String.valueOf(new Random().nextInt(10)));
-            }
-            else{
-                hashMap.put("Searial", String.format("1MO18120400")+String.valueOf(new Random().nextInt(99)));
-                hashMap.put("SearialNum", String.format("1SOA18112700")+String.valueOf(new Random().nextInt(99)));
-                hashMap.put("Company1", String.format("F260011ATN-")+String.valueOf(new Random().nextInt(10)));
-            }
+                    }
 
-            hashMap.put("Company2", String.valueOf(companyName));
-            hashMap.put("Quantity1",String.format("　數量：") +String.valueOf(new Random().nextInt(90)+1));
-            hashMap.put("Quantity2",String.format("結關日：2018-12-07"));
-            hashMap.put("Data",String.format("上線日：2018-12-07"));
-            hashMap.put("Job", String.format("一群-點焊"));
-            hashMap.put("takeEffect",String.format("生效"));
+                    @Override
+                    public void onNext(@NonNull Response<List<MoResponse>> listResponse) {
+                        int size = listResponse.body().size();
 
-            min+=20;
-            if(min>50){
-                min=10;
-                j++;
-                hashMap.put("Data", String.format("計畫開始：" + String.valueOf(j)
-                        + String.format(":") + String.valueOf(min)));
-            }
-            hashMap.put("Data", String.format("計畫開始：" + String.valueOf(j)
-                    + String.format(":") + String.valueOf(min)));
-            arrayList.add(hashMap);
-        }
-        callback.getData(arrayList);
+                        Log.d("getMfg", "onNext: " + size);
+                        Log.d("getMfg", "onNext: " + soId);
+                        Log.d("getMfg", "onNext: " + customerName);
+
+                        for (int i = 0; i < size; i++) {
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("Num", String.valueOf(i+1));
+                            hashMap.put("mo_id", listResponse.body().get(i).MoId());
+                            hashMap.put("so_id", listResponse.body().get(i).SoId());
+                            hashMap.put("item_id", listResponse.body().get(i).ItemId());
+                            hashMap.put("customer", listResponse.body().get(i).Customer());
+                            hashMap.put("qty",String.format("　數量：") +listResponse.body().get(i).Qty());
+                            hashMap.put("complete_date",String.format("結關日：")+listResponse.body().get(i).CompleteDate());
+                            hashMap.put("online_date",String.format("上線日：")+listResponse.body().get(i).OnlineDate());
+                            hashMap.put("related_tech_route", listResponse.body().get(i).TechRoutingName());
+                            hashMap.put("takeEffect",String.format("生效"));
+                            arrayList.add(hashMap);
+                            Log.d("getMfg", "onNext: " + i);
+                        }
+                        Log.d("getMfg", "onNext: " + arrayList);
+                        callback.Data(arrayList);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d("getMfg", "onError: " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("getMfg", "onComplete");
+                    }
+                });
+
     }
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,13 +51,9 @@ public class SearchScheduleActivity extends AppCompatActivity implements SearchS
 
         Intent intent = getIntent();
 
-        searchSchedulePresenter = new SearchSchedulePresenter(this);
-        searchSchedulePresenter.Ans();
+        searchSchedulePresenter = new SearchSchedulePresenter(this,this);
+        searchSchedulePresenter.getData(sp.loadCustomerName(),sp.loadSoId(),sp.loadToken());
 
-        searchSchedulerecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        searchSchedulerecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        searchScheduleAdapter = new SearchScheduleAdapter(marrayList,this);
-        searchSchedulerecyclerView.setAdapter(searchScheduleAdapter);
 
         backImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +64,13 @@ public class SearchScheduleActivity extends AppCompatActivity implements SearchS
     }
 
     @Override
-    public void getData(ArrayList arrayList){
+    public void Data(ArrayList arrayList){
         marrayList = arrayList;
+        Log.d("Data", "Data: "+marrayList);
+
+        searchSchedulerecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        searchSchedulerecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        searchScheduleAdapter = new SearchScheduleAdapter(marrayList,this);
+        searchSchedulerecyclerView.setAdapter(searchScheduleAdapter);
     }
 }

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public interface SearchScheduleContract {
     interface view{
-        void getData(ArrayList arrayList);
+        void Data(ArrayList arrayList);
     }
 
     interface searchSchedulepresenter{
-        void Ans();
+        void getData(String customerName, String soId, String token);
     }
 }

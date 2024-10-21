@@ -11,6 +11,8 @@ public class SP {
     private Context context;
     private static String TOKEN = "token";
     private static String NAME = "name";
+    private static String SOID = "soId";
+    private static String CUSTOMERNAME = "customerName";
 
     public SP(Context context) {
         this.context = context;
@@ -31,4 +33,20 @@ public class SP {
         return spf.getString(NAME," ");
     }
     ////////////////////////////////////////////////////////////////////////////////
+    public void saveSoId(String soId) {
+        spf.edit().putString(SOID, soId).apply();
+    }
+
+    public String loadSoId() {
+        // 讀取 soId，若為空則返回空白字串
+        return spf.getString(SOID, " ");
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    public void saveCustomerName(String customerName) {
+        spf.edit().putString(CUSTOMERNAME, customerName).apply();
+    }
+    public String loadCustomerName() {
+        return spf.getString(CUSTOMERNAME," ");
+    }
 }

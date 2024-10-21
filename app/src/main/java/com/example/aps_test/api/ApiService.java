@@ -4,6 +4,7 @@ import com.example.aps_test.api.request.DataCustomerResponse;
 import com.example.aps_test.api.request.DataSoIdResponse;
 import com.example.aps_test.api.request.LoginDataResponse;
 import com.example.aps_test.api.request.LoginResponse;
+import com.example.aps_test.api.request.MoResponse;
 
 import java.util.List;
 
@@ -38,5 +39,10 @@ public interface ApiService {
             @Query("token") String token
     );
 
-
+    @GET("get-manufacture")
+    Observable<Response<List<MoResponse>>> getMfg(
+            @Query("customer") String customer,
+            @Query("sale_order") String sale_order,
+            @Query("token") String token
+    );
 }

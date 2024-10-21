@@ -35,7 +35,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/recyclerview_searial_tv"
+                    android:id="@+id/recyclerview_MoId_tv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -44,7 +44,7 @@
                     android:textColor="#4BEA5E" />
 
                 <TextView
-                    android:id="@+id/recyclerview_searialN_tv"
+                    android:id="@+id/recyclerview_SoId_tv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -60,19 +60,19 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/recyclerview_company1_tv"
+                    android:id="@+id/recyclerview_ItemId_tv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="center|left"
                     android:text="TextView" />
 
                 <TextView
-                    android:id="@+id/recyclerview_company2_tv"
+                    android:id="@+id/recyclerview_Customer_tv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="center|left"
                     android:text="TextView" />
             </LinearLayout>
 
@@ -83,7 +83,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/recyclerview_quantity1_tv"
+                    android:id="@+id/recyclerview_quantity_tv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -91,7 +91,7 @@
                     android:text="TextView" />
 
                 <TextView
-                    android:id="@+id/recyclerview_quantity2_tv"
+                    android:id="@+id/recyclerview_CompleteDate_tv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -100,7 +100,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/recyclerview_data_tv"
+                android:id="@+id/recyclerview_OnlineDate_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -108,10 +108,10 @@
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/recyclerview_job_tv"
+                android:id="@+id/recyclerview_RelatedTechRoute_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.6"
                 android:gravity="center"
                 android:text="TextView"
                 android:textColor="#4BEA5E"/>
@@ -120,7 +120,7 @@
                 android:id="@+id/recyclerview_takeEffect_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:gravity="center"
                 android:text="TextView" />
 
@@ -129,7 +129,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:scaleType="centerInside"
                 android:src="@drawable/u34" />
         </LinearLayout>

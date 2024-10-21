@@ -77,6 +77,9 @@ public class FirstSearchActivity extends AppCompatActivity implements FirstSearc
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sp.saveSoId(numEditText.getText().toString());
+                sp.saveCustomerName(personEditText.getText().toString());
+
                 Intent intent = new Intent(FirstSearchActivity.this, SearchScheduleActivity.class);
                 startActivity(intent);
             }
@@ -96,6 +99,7 @@ public class FirstSearchActivity extends AppCompatActivity implements FirstSearc
         dot2TextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sp.saveSoId(numEditText.getText().toString());
                 Get_so_id(numEditText.getText().toString());
             }
         });
@@ -104,6 +108,7 @@ public class FirstSearchActivity extends AppCompatActivity implements FirstSearc
         dot3TextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sp.saveCustomerName(personEditText.getText().toString());
                 Get_customer_name(personEditText.getText().toString());
             }
         });
