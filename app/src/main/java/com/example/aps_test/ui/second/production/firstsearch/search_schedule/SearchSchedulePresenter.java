@@ -5,14 +5,12 @@ import android.util.Log;
 
 import com.example.aps_test.api.ApiClient;
 import com.example.aps_test.api.ApiService;
-import com.example.aps_test.api.request.MoResponse;
+import com.example.aps_test.api.response.MoResponse;
 import com.example.aps_test.sharedPreferences.SP;
-import com.example.aps_test.ui.second.schedule.ScheduleContract;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -53,10 +51,6 @@ public class SearchSchedulePresenter implements SearchScheduleContract.searchSch
                     public void onNext(@NonNull Response<List<MoResponse>> listResponse) {
                         int size = listResponse.body().size();
 
-                        Log.d("getMfg", "onNext: " + size);
-                        Log.d("getMfg", "onNext: " + soId);
-                        Log.d("getMfg", "onNext: " + customerName);
-
                         for (int i = 0; i < size; i++) {
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("Num", String.valueOf(i+1));
@@ -70,10 +64,9 @@ public class SearchSchedulePresenter implements SearchScheduleContract.searchSch
                             hashMap.put("related_tech_route", listResponse.body().get(i).TechRoutingName());
                             hashMap.put("takeEffect",String.format("生效"));
                             arrayList.add(hashMap);
-                            Log.d("getMfg", "onNext: " + i);
                         }
                         Log.d("getMfg", "onNext: " + arrayList);
-                        callback.Data(arrayList);
+                        callback.Data(arrayList,size);
                     }
 
                     @Override

@@ -84,7 +84,7 @@
                 android:layout_weight="1.12">
 
                 <TextView
-                    android:id="@+id/searchResult_searialNum1_tv"
+                    android:id="@+id/searchResult_MoId_tv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -93,7 +93,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/searchResult_searialNum2_tv"
+                    android:id="@+id/searchResult_SoId_tv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -108,7 +108,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/searchResult_companyNum_tv"
+                    android:id="@+id/searchResult_ItemId_tv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -117,7 +117,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/searchResult_thing_tv"
+                    android:id="@+id/searchResult_ItemName_tv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -177,7 +177,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/searchResult_job_tv"
+                android:id="@+id/searchResult_TechRoutingName_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.18"

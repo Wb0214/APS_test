@@ -1,10 +1,12 @@
 package com.example.aps_test.api;
 
-import com.example.aps_test.api.request.DataCustomerResponse;
-import com.example.aps_test.api.request.DataSoIdResponse;
-import com.example.aps_test.api.request.LoginDataResponse;
-import com.example.aps_test.api.request.LoginResponse;
-import com.example.aps_test.api.request.MoResponse;
+import com.example.aps_test.api.response.DataCustomerResponse;
+import com.example.aps_test.api.response.DataSoIdResponse;
+import com.example.aps_test.api.response.LoginDataResponse;
+import com.example.aps_test.api.response.LoginResponse;
+import com.example.aps_test.api.response.MoResponse;
+import com.example.aps_test.api.response.PrevMfgResponse;
+import com.example.aps_test.api.response.ROMResponse;
 
 import java.util.List;
 
@@ -45,4 +47,25 @@ public interface ApiService {
             @Query("sale_order") String sale_order,
             @Query("token") String token
     );
+
+    @GET("get-prev-manufacture")
+    Observable<Response<List<PrevMfgResponse>>> getPrevMfg(
+            @Query("so_id") String so_id,
+            @Query("item_id") String item_id,
+            @Query("token") String token
+    );
+
+    @GET("get-current-stage-com")
+    Observable<Response<List<ROMResponse>>> getBOM(
+            @Query("item_id") String item_id,
+            @Query("token") String token
+    );
+
+//    @GET("get-sale-order")
+//    Observable<Response<List<DataResponse>>> getSaleOrder(
+//            @Query("sale_order") String so_id,
+//            @Query("customer") String customer,
+//            @Query("online_date") String online_date,
+//            @Query("token") String token
+//    );
 }

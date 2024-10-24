@@ -1,7 +1,6 @@
 package com.example.aps_test.ui.second.production.firstsearch.search_schedule;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,12 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.example.APS_test.R;
 import com.example.aps_test.sharedPreferences.SP;
-import com.example.aps_test.ui.second.schedule.ScheduleAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +25,7 @@ public class SearchScheduleActivity extends AppCompatActivity implements SearchS
 
     private RecyclerView searchSchedulerecyclerView;
     SearchScheduleAdapter searchScheduleAdapter;
-    private TextView NameTextView;
+    private TextView NameTextView,SumTextView;
     private ImageView backImageView;
     private SearchSchedulePresenter searchSchedulePresenter;
     private SP sp;
@@ -44,8 +41,10 @@ public class SearchScheduleActivity extends AppCompatActivity implements SearchS
         setContentView(R.layout.activity_search_schedule);
 
         backImageView = findViewById(R.id.searchSchedule_back_iv);
+        SumTextView = findViewById(R.id.searchSchedule_Sum_tv);
         searchSchedulerecyclerView = findViewById(R.id.searchSchedule_list_rv);
         NameTextView = findViewById(R.id.searchSchedule_name_tv);
+
         sp = new SP(this);
         NameTextView.setText(sp.loadName());
 
@@ -64,9 +63,10 @@ public class SearchScheduleActivity extends AppCompatActivity implements SearchS
     }
 
     @Override
-    public void Data(ArrayList arrayList){
+    public void Data(ArrayList arrayList,Integer Sum){
         marrayList = arrayList;
         Log.d("Data", "Data: "+marrayList);
+        SumTextView.setText("共"+Sum+"筆");
 
         searchSchedulerecyclerView.setLayoutManager(new LinearLayoutManager(this));
         searchSchedulerecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));

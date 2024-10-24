@@ -5,8 +5,8 @@ import android.util.Log;
 
 import com.example.aps_test.api.ApiClient;
 import com.example.aps_test.api.ApiService;
-import com.example.aps_test.api.request.DataCustomerResponse;
-import com.example.aps_test.api.request.DataSoIdResponse;
+import com.example.aps_test.api.response.DataCustomerResponse;
+import com.example.aps_test.api.response.DataSoIdResponse;
 import com.example.aps_test.sharedPreferences.SP;
 
 import java.util.List;

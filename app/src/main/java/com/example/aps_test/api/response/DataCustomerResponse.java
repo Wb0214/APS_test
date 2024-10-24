@@ -1,4 +1,4 @@
-package com.example.aps_test.api.request;
+package com.example.aps_test.api.response;
 
 public class DataCustomerResponse {
     public String customer_name;

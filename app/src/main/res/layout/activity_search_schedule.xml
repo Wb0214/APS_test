@@ -82,7 +82,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/searchSchedule_Toptheme2_tv"
+            android:id="@+id/searchSchedule_Sum_tv"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"

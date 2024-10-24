@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface SearchScheduleContract {
     interface view{
-        void Data(ArrayList arrayList);
+        void Data(ArrayList arrayList, Integer Sum);
     }
 
     interface searchSchedulepresenter{

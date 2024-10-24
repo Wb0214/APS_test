@@ -5,14 +5,13 @@ import android.util.Log;
 
 import com.example.aps_test.api.ApiClient;
 import com.example.aps_test.api.ApiService;
-import com.example.aps_test.api.request.LoginDataResponse;
-import com.example.aps_test.api.request.LoginResponse;
+import com.example.aps_test.api.response.LoginDataResponse;
+import com.example.aps_test.api.response.LoginResponse;
 import com.example.aps_test.sharedPreferences.SP;
 
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.observers.DefaultObserver;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Response;
@@ -67,7 +66,7 @@ public class MainPresenter implements MainContract.mainpresenter{
                 .subscribe(new DisposableObserver<Response<LoginResponse>>() {
                     @Override
                     public void onNext(@NonNull Response<LoginResponse> loginResponse) {
-                        if(account.equals("e1001") && password.equals("e1001")){
+                        if(loginResponse.body()!=null){
                             sp.saveToken(loginResponse.body().gettoken());
                             Log.d("getToken", "onNext: "+loginResponse.body().gettoken());
                             callBake.GetLoginData();
