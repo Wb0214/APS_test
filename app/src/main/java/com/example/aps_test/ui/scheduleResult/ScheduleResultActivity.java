@@ -116,15 +116,23 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
                 }
 
                 else if(position == 1){
-                    MoIdTextView.setText("1MO1812040031");
-                    SoIdTextView.setText("1SO1811270009");
-                    ItemIdTextView.setText("F260011ATN-2");
-                    ItemNameTextView.setText("ATN260011  系統櫃(垃圾筒) -抽屜+垃圾筒固定片*4pcs");
-                    onlineTimeTextView.setText("預計上線：2018-12-06");
-                    quantityTextView.setText("生產數量：3");
-                    startTimeTextView.setText("計劃開始：08:00");
-                    finishTimeTextView.setText("生產結束：08:05");
-                    TechRoutingNameTextView.setText("一群-點焊");
+                    String MoId = arrayList.get(0).get("MoId");
+                    String SoId = arrayList.get(0).get("SoId");
+                    String ItemId = arrayList.get(0).get("ItemId");
+                    String ItemName = arrayList.get(0).get("ItemName");
+                    String OnlineDate = arrayList.get(0).get("OnlineDate");
+                    String Qty = arrayList.get(0).get("Qty");
+                    String TechRoutingName = arrayList.get(0).get("TechRoutingName");
+
+                    MoIdTextView.setText(MoId);
+                    SoIdTextView.setText(SoId);
+                    ItemIdTextView.setText(ItemId);
+                    ItemNameTextView.setText(ItemName);
+                    onlineTimeTextView.setText("預計上線："+OnlineDate);
+                    quantityTextView.setText("生產數量："+Qty);
+                    startTimeTextView.setText("計劃開始：15:30");
+                    finishTimeTextView.setText("生產結束：15:45");
+                    TechRoutingNameTextView.setText(TechRoutingName);
                     stateTextView.setText("生效");
                     stateTextView.setTextColor(Color.parseColor("#36BC5C"));
                 }
