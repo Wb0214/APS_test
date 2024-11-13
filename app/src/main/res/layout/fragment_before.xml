@@ -80,7 +80,7 @@
                         android:background="@drawable/double_line"
                         android:gravity="center"
                         android:text="廠內製造命令(一群-大馬)"
-                        android:textSize="14sp" />
+                        android:textSize="13sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -100,7 +100,7 @@
                         android:textSize="10sp" />
 
                     <TextView
-                        android:id="@+id/before_mainFrom_tv"
+                        android:id="@+id/before_Soid_tv"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.3"
@@ -140,7 +140,7 @@
                             android:textSize="10sp"/>
 
                         <TextView
-                            android:id="@+id/before_TwoMainNum_tv"
+                            android:id="@+id/before_Moid_tv"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="0.7"
@@ -156,7 +156,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/before_TwoMainMaster_tv"
+                            android:id="@+id/before_itemId_tv"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="0.48"
@@ -165,7 +165,7 @@
                             android:textSize="10sp"/>
 
                             <TextView
-                                android:id="@+id/before_TwoMainName_tv"
+                                android:id="@+id/before_ItemName_tv"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.7"
@@ -191,7 +191,7 @@
                         android:background="@drawable/underline">
 
                         <TextView
-                            android:id="@+id/before_TwoMainQuantity_tv"
+                            android:id="@+id/before_Qty_tv"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="0.2"
@@ -222,7 +222,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.2"
+                    android:layout_weight="0.17"
                     android:orientation="horizontal"
                     android:background="@drawable/underline">
 
@@ -299,7 +299,7 @@
                     android:id="@+id/before_list_rv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="0.6"/>
 
 
             </LinearLayout>

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.example.APS_test.R;
 import com.example.aps_test.ui.scheduleResult.ScheduleResultAdapter;
+import com.example.aps_test.ui.scheduleResult.resultFragment.resultAdapter.AfterAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,8 +25,8 @@ import java.util.HashMap;
 
 public class AfterFragment extends Fragment {
     private Context context;
-    private RecyclerView scheduleResultRecyclerView;
-    ScheduleResultAdapter scheduleResultAdapter;
+    private RecyclerView AfterRecyclerView;
+    AfterAdapter afterAdapter;
 
     ArrayList<HashMap<String, String>> marrayList = new ArrayList<>();
 
@@ -59,11 +60,11 @@ public class AfterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        scheduleResultRecyclerView = view.findViewById(R.id.before_list_rv);
+        AfterRecyclerView = view.findViewById(R.id.before_list_rv);
 
-        scheduleResultRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        scheduleResultRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
-        scheduleResultAdapter = new ScheduleResultAdapter(marrayList,context);
-        scheduleResultRecyclerView.setAdapter(scheduleResultAdapter);
+        AfterRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        AfterRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+        afterAdapter = new AfterAdapter(marrayList,context);
+        AfterRecyclerView.setAdapter(afterAdapter);
     }
 }

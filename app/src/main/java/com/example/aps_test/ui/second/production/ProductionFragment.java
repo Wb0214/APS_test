@@ -38,7 +38,6 @@ public class ProductionFragment extends Fragment{
         super.onCreate(savedInstanceState);
     }
 
-    @SuppressLint("MissingInflatedId")
     @Override
     //onCreateView，這裡是用來創立Fragment的View並且回傳，
     // 物件的id也可以選擇在這裡綁定，但通常還是會再下一個方法綁定，

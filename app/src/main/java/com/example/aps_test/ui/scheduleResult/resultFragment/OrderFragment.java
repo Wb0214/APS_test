@@ -7,16 +7,27 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.APS_test.R;
+import com.example.aps_test.ui.scheduleResult.resultFragment.resultAdapter.OrderAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class OrderFragment extends Fragment {
     private Context context;
+    private RecyclerView OrderRecyclerView;
+    OrderAdapter orderAdapter;
+
+    ArrayList<HashMap<String, String>> marrayList = new ArrayList<>();
 
     public OrderFragment(Context context) {
         this.context = context;
@@ -48,6 +59,16 @@ public class OrderFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        OrderRecyclerView = view.findViewById(R.id.order_list_tv);
 
+        OrderRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        OrderRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+        orderAdapter = new OrderAdapter(marrayList, context);
+        OrderRecyclerView.setAdapter(orderAdapter);
     }
+
+//    @Override
+//    public void getData(ArrayList arrayList){
+//        marrayList = arrayList;
+//    }
 }

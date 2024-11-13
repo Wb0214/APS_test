@@ -7,16 +7,27 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.APS_test.R;
+import com.example.aps_test.ui.scheduleResult.resultFragment.resultAdapter.AssemblyAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class AssemblyFragment extends Fragment {
     private Context context;
+    private RecyclerView AssemblyRecyclerView;
+    AssemblyAdapter assemblyAdapter;
+
+    ArrayList<HashMap<String, String>> marrayList = new ArrayList<>();
 
     public AssemblyFragment(Context context) {
         this.context = context;
@@ -48,6 +59,11 @@ public class AssemblyFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        AssemblyRecyclerView = view.findViewById(R.id.before_list_rv);
 
+        AssemblyRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        AssemblyRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+        assemblyAdapter = new AssemblyAdapter(marrayList, context);
+        AssemblyRecyclerView.setAdapter(assemblyAdapter);
     }
 }

@@ -44,7 +44,8 @@
             android:id="@+id/result_useQuantity_tv"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.35"
+            android:gravity="center|top"
+            android:layout_weight="0.15"
             android:text="TextView"/>
 
         <TextView
@@ -80,7 +81,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#C1E0E1E2"
             android:text="TextView"/>
 
         <TextView

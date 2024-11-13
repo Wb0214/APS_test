@@ -3,7 +3,7 @@ package com.example.aps_test.api.response;
 public class PrevMfgResponse {
     public String mo_id,so_id,
                 item_id,item_name,
-                online_date,qty;
+                online_date,qty,complete_date;
 
     public String MoId() {
         return mo_id;
@@ -22,6 +22,9 @@ public class PrevMfgResponse {
     }
     public String Qty() {
         return qty;
+    }
+    public String CompleteDate() {
+        return complete_date;
     }
 
     public MoResponse.Related_tech_route related_tech_route;

@@ -1,5 +1,6 @@
 package com.example.aps_test.api;
 
+import com.example.aps_test.api.response.AfterMfgResponse;
 import com.example.aps_test.api.response.DataCustomerResponse;
 import com.example.aps_test.api.response.DataSoIdResponse;
 import com.example.aps_test.api.response.LoginDataResponse;
@@ -58,6 +59,13 @@ public interface ApiService {
     @GET("get-current-stage-com")
     Observable<Response<List<ROMResponse>>> getBOM(
             @Query("item_id") String item_id,
+            @Query("token") String token
+    );
+
+    @GET("get-next-part")
+    Observable<Response<List<AfterMfgResponse>>> getAfterMfg(
+            @Query("sale_order") String sale_order,
+            @Query("id") String id,
             @Query("token") String token
     );
 

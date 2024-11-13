@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -71,7 +72,6 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
         sp = new SP(activity);
         this.apiClient = new ApiClient();
         this.apiService = apiClient.LoginApi().create(ApiService.class);
-        getPrevMfgData = GetPrevMfgData.getInstance();
     }
     @NonNull
     @Override
@@ -83,7 +83,7 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
 
     @Override
     public void onBindViewHolder(@NonNull SearchScheduleAdapter.ViewHolder holder, int position) {
-
+        getPrevMfgData = GetPrevMfgData.getInstance();
         Log.d("onBindViewHolder", "onBindViewHolder: "+arrayList);
         holder.numTextView.setText(arrayList.get(position).get("Num"));
         holder.MoIdTextView.setText(arrayList.get(position).get("mo_id"));
@@ -123,6 +123,7 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
 
                     @Override
                     public void onNext(@io.reactivex.rxjava3.annotations.NonNull Response<List<PrevMfgResponse>> listResponse) {
+                        getPrevMfgData = GetPrevMfgData.getInstance();
                         int size = listResponse.body().size();
                         arrayList.clear();
 
@@ -135,12 +136,17 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                             hashMap.put("ItemName",listResponse.body().get(0).ItemName());
                             hashMap.put("OnlineDate",listResponse.body().get(0).OnlineDate());
                             hashMap.put("Qty",listResponse.body().get(0).Qty());
+                            hashMap.put("CompleteDate",listResponse.body().get(0).CompleteDate());
                             hashMap.put("TechRoutingName",listResponse.body().get(0).TechRoutingName());
                             arrayList.add(hashMap);
+                            getPrevMfgData.setPrevMfgArrayList(arrayList);
                         }
-
+                        else{
+                            Toast.makeText(activity, "查無資料", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         Log.d("GetPrevMfg", "onNext: "+arrayList);
-                        getPrevMfgData.setPrevMfgArrayList(arrayList);
+
                     }
 
                     @Override
