@@ -69,6 +69,7 @@ public interface ApiService {
             @Query("token") String token
     );
 
+
 //    @GET("get-sale-order")
 //    Observable<Response<List<DataResponse>>> getSaleOrder(
 //            @Query("sale_order") String so_id,

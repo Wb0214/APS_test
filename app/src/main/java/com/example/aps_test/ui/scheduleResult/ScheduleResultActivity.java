@@ -15,6 +15,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.APS_test.R;
 import com.example.aps_test.instance.GetPrevMfgData;
+import com.example.aps_test.instance.GetROMData;
 import com.example.aps_test.sharedPreferences.SP;
 import com.example.aps_test.ui.scheduleResult.resultFragment.ResultViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
@@ -35,13 +36,13 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
     private Context context= this;
     private SP sp;
     private GetPrevMfgData getPrevMfgData;
+    private GetROMData getROMData;
 
     private String[] title= {"前關製令","本階製令","後關製令","裝配製令","銷售訂單"};
     private String[] theme= {"當日進度表","進度表查詢"};
 
-    ArrayList<HashMap<String,String>> arrayList = new ArrayList<>();
-    private int Index = 0;
-    private int maxIndex = 3;
+    ArrayList<HashMap<String,String>> PrevMfgarrayList = new ArrayList<>();
+    ArrayList<HashMap<String,String>> ROMarrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,18 +90,24 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
                 rightImageView.setVisibility(position == 4 ? View.INVISIBLE : View.VISIBLE);
 
                 getPrevMfgData = GetPrevMfgData.getInstance();
-                arrayList = getPrevMfgData.getPrevMfgArrayList();
-                Log.e("TAG", "onPageSelected: " + getPrevMfgData.getPrevMfgArrayList());
-                Log.e("TAG", "onPageSelected: " + arrayList);
+                PrevMfgarrayList = getPrevMfgData.getPrevMfgArrayList();
+                Log.e("ScheduleResultActivity", "getPrevMfgArrayList: " + PrevMfgarrayList);
+                getROMData = GetROMData.getInstance();
+                ROMarrayList = getROMData.getROMArrayList();
+                Log.e("ScheduleResultActivity", "getROMArrayList: " + ROMarrayList);
+
+                getROMData = GetROMData.getInstance();
 
                 if(position == 0){
-                    String MoId = arrayList.get(0).get("MoId");
-                    String SoId = arrayList.get(0).get("SoId");
-                    String ItemId = arrayList.get(0).get("ItemId");
-                    String ItemName = arrayList.get(0).get("ItemName");
-                    String OnlineDate = arrayList.get(0).get("OnlineDate");
-                    String Qty = arrayList.get(0).get("Qty");
-                    String TechRoutingName = arrayList.get(0).get("TechRoutingName");
+                    String MoId = PrevMfgarrayList.get(0).get("MoId");
+                    String SoId = PrevMfgarrayList.get(0).get("SoId");
+                    String ItemId = PrevMfgarrayList.get(0).get("ItemId");
+                    String ItemName = PrevMfgarrayList.get(0).get("ItemName");
+                    String OnlineDate = PrevMfgarrayList.get(0).get("OnlineDate");
+                    String Qty = PrevMfgarrayList.get(0).get("Qty");
+                    String TechRoutingName = PrevMfgarrayList.get(0).get("TechRoutingName");
+                    String CreatedAt = PrevMfgarrayList.get(0).get("CreatedAt");
+                    String UpdatedAt = PrevMfgarrayList.get(0).get("UpdatedAt");
 
                     MoIdTextView.setText(MoId);
                     SoIdTextView.setText(SoId);
@@ -108,31 +115,33 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
                     ItemNameTextView.setText(ItemName);
                     onlineTimeTextView.setText("預計上線："+OnlineDate);
                     quantityTextView.setText("生產數量："+Qty);
-                    startTimeTextView.setText("計劃開始：15:30");
-                    finishTimeTextView.setText("生產結束：15:45");
+                    startTimeTextView.setText("計劃開始："+CreatedAt.substring(11,CreatedAt.length()-3));
+                    finishTimeTextView.setText("生產結束：" + UpdatedAt.substring(11,UpdatedAt.length()-3));
                     TechRoutingNameTextView.setText(TechRoutingName);
                     stateTextView.setText("結案");
                     stateTextView.setTextColor(Color.parseColor("#FF0101"));
                 }
 
                 else if(position == 1){
-                    String MoId = arrayList.get(0).get("MoId");
-                    String SoId = arrayList.get(0).get("SoId");
-                    String ItemId = arrayList.get(0).get("ItemId");
-                    String ItemName = arrayList.get(0).get("ItemName");
-                    String OnlineDate = arrayList.get(0).get("OnlineDate");
-                    String Qty = arrayList.get(0).get("Qty");
-                    String TechRoutingName = arrayList.get(0).get("TechRoutingName");
+                    String ROMMoId = PrevMfgarrayList.get(0).get("MoId");
+                    String ROMSoId = PrevMfgarrayList.get(0).get("SoId");
+                    String ROMItemId = PrevMfgarrayList.get(0).get("ItemId");
+                    String ROMBomkeyName = ROMarrayList.get(0).get("BomkeyName");
+                    String ROMOnlineDate = PrevMfgarrayList.get(0).get("OnlineDate");
+                    String ROMBaseQty = ROMarrayList.get(0).get("BaseQty");
+                    String ROMTechRoutingName = PrevMfgarrayList.get(0).get("TechRoutingName");
+                    String ROMCreatedAt = ROMarrayList.get(0).get("CreatedAt");
+                    String ROMUpdatedAt = ROMarrayList.get(0).get("UpdatedAt");
 
-                    MoIdTextView.setText(MoId);
-                    SoIdTextView.setText(SoId);
-                    ItemIdTextView.setText(ItemId);
-                    ItemNameTextView.setText(ItemName);
-                    onlineTimeTextView.setText("預計上線："+OnlineDate);
-                    quantityTextView.setText("生產數量："+Qty);
-                    startTimeTextView.setText("計劃開始：15:30");
-                    finishTimeTextView.setText("生產結束：15:45");
-                    TechRoutingNameTextView.setText(TechRoutingName);
+                    MoIdTextView.setText(ROMMoId);
+                    SoIdTextView.setText(ROMSoId);
+                    ItemIdTextView.setText(ROMItemId);
+                    ItemNameTextView.setText(ROMBomkeyName);
+                    onlineTimeTextView.setText("預計上線："+ROMOnlineDate);
+                    quantityTextView.setText("生產數量："+ROMBaseQty);
+                    startTimeTextView.setText("計劃開始："+ROMCreatedAt.substring(11,ROMCreatedAt.length()-3));
+                    finishTimeTextView.setText("生產結束：" + ROMUpdatedAt.substring(11,ROMUpdatedAt.length()-3));
+                    TechRoutingNameTextView.setText(ROMTechRoutingName);
                     stateTextView.setText("生效");
                     stateTextView.setTextColor(Color.parseColor("#36BC5C"));
                 }
