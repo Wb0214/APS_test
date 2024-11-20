@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.APS_test.R;
+import com.example.aps_test.instance.GetAfterData;
+import com.example.aps_test.instance.GetCurrentStageData;
 import com.example.aps_test.instance.GetPrevMfgData;
 import com.example.aps_test.instance.GetROMData;
 import com.example.aps_test.sharedPreferences.SP;
@@ -37,12 +39,16 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
     private SP sp;
     private GetPrevMfgData getPrevMfgData;
     private GetROMData getROMData;
+    private GetAfterData getAfterData;
+    private GetCurrentStageData getCurrentStageData;
 
     private String[] title= {"前關製令","本階製令","後關製令","裝配製令","銷售訂單"};
     private String[] theme= {"當日進度表","進度表查詢"};
 
     ArrayList<HashMap<String,String>> PrevMfgarrayList = new ArrayList<>();
     ArrayList<HashMap<String,String>> ROMarrayList = new ArrayList<>();
+    ArrayList<HashMap<String,String>> AfterarrayList = new ArrayList<>();
+    ArrayList<HashMap<String,String>> CurrentStagearrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,15 +95,24 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
                 leftImageView.setVisibility(position == 0 ? View.INVISIBLE : View.VISIBLE);
                 rightImageView.setVisibility(position == 4 ? View.INVISIBLE : View.VISIBLE);
 
+                //實例取資料
                 getPrevMfgData = GetPrevMfgData.getInstance();
                 PrevMfgarrayList = getPrevMfgData.getPrevMfgArrayList();
                 Log.e("ScheduleResultActivity", "getPrevMfgArrayList: " + PrevMfgarrayList);
+
                 getROMData = GetROMData.getInstance();
                 ROMarrayList = getROMData.getROMArrayList();
                 Log.e("ScheduleResultActivity", "getROMArrayList: " + ROMarrayList);
 
-                getROMData = GetROMData.getInstance();
+                getAfterData = GetAfterData.getInstance();
+                AfterarrayList = getAfterData.getAfterArrayList();
+                Log.e("ScheduleResultActivity", "getAfterArrayList: " + AfterarrayList);
 
+                getCurrentStageData = GetCurrentStageData.getInstance();
+                CurrentStagearrayList = getCurrentStageData.getCurrentStageArrayList();
+                Log.e("ScheduleResultActivity", "getCurrentStageArrayList: " + CurrentStagearrayList);
+
+                ///////////////////////////////////////////////////////////
                 if(position == 0){
                     String MoId = PrevMfgarrayList.get(0).get("MoId");
                     String SoId = PrevMfgarrayList.get(0).get("SoId");
@@ -147,29 +162,54 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
                 }
 
                 else if(position == 2){
-                    MoIdTextView.setText("1MO1812040025");
-                    SoIdTextView.setText("1SO1811270009");
-                    ItemIdTextView.setText("J1-EP340T-F260011ATN-2");
-                    ItemNameTextView.setText("ATN260011  系統櫃(垃圾筒) -抽屜+垃圾筒固定片*4pcs");
-                    onlineTimeTextView.setText("預計上線：2018-12-07");
-                    quantityTextView.setText("生產數量：3");
-                    startTimeTextView.setText("計劃開始：09:30");
-                    finishTimeTextView.setText("生產結束：09:50");
+                    String AfterMoId = AfterarrayList.get(0).get("MoId");
+                    String AfterSoId = PrevMfgarrayList.get(0).get("SoId");
+                    String AfterItemId = AfterarrayList.get(0).get("ItemId");
+                    String AfterCreatedAt = AfterarrayList.get(0).get("CreatedAt");
+                    String AfterUpdatedAt = AfterarrayList.get(0).get("UpdatedAt");
+                    String AfterNuseQty = AfterarrayList.get(0).get("NuseQty");
+                    String AfterItemName = AfterarrayList.get(0).get("ItemName");
+                    String AfterOnlineDate = AfterarrayList.get(0).get("OnlineDate");
+                    String AfterCompleteDate = AfterarrayList.get(0).get("CompleteDate");
+                    String AfterQty = AfterarrayList.get(0).get("Qty");
+                    String AfterBomkeyName = AfterarrayList.get(0).get("BomkeyName");
+                    String AfterUnitId = AfterarrayList.get(0).get("UnitId");
+
+
+                    MoIdTextView.setText(AfterMoId);
+                    SoIdTextView.setText(AfterSoId);
+                    ItemIdTextView.setText(AfterItemId);
+                    ItemNameTextView.setText(AfterItemName);
+                    onlineTimeTextView.setText("預計上線："+AfterOnlineDate);
+                    quantityTextView.setText("生產數量："+AfterQty);
+                    startTimeTextView.setText("計劃開始："+AfterCreatedAt.substring(11,AfterCreatedAt.length()-3));
+                    finishTimeTextView.setText("生產結束：" + AfterUpdatedAt.substring(11,AfterUpdatedAt.length()-3));
                     TechRoutingNameTextView.setText("一群-點焊");
                     stateTextView.setText("塗裝");
                     stateTextView.setTextColor(Color.parseColor("#36BC5C"));
                 }
 
                 else if(position == 3){
-                    MoIdTextView.setText("1MO1812040005");
-                    SoIdTextView.setText("1SO1811270009");
-                    ItemIdTextView.setText("ATN260011-06");
-                    ItemNameTextView.setText("EP338T砂漆淺灰/EP340T砂漆灰  系統櫃組合--26”下箱垃圾桶櫃");
-                    onlineTimeTextView.setText("預計上線：2018-12-08");
-                    quantityTextView.setText("生產數量：3");
-                    startTimeTextView.setText("計劃開始：08:00");
-                    finishTimeTextView.setText("生產結束：08:05");
-                    TechRoutingNameTextView.setText("一群-裝配");
+                    String MoId = CurrentStagearrayList.get(0).get("MoId");
+                    String SoId = CurrentStagearrayList.get(0).get("SoId");
+                    String ItemId = CurrentStagearrayList.get(0).get("ItemId");
+                    String ItemName = CurrentStagearrayList.get(0).get("ItemName");
+                    String OnlineDate = CurrentStagearrayList.get(0).get("OnlineDate");
+                    String CompleteDate = CurrentStagearrayList.get(0).get("CompleteDate");
+                    String Qty = CurrentStagearrayList.get(0).get("Qty");
+                    String TechRoutingName = CurrentStagearrayList.get(0).get("TechRoutingName");
+                    String CreatedAt = CurrentStagearrayList.get(0).get("CreatedAt");
+                    String UpdatedAt = CurrentStagearrayList.get(0).get("UpdatedAt");
+
+                    MoIdTextView.setText(MoId);
+                    SoIdTextView.setText(SoId);
+                    ItemIdTextView.setText(ItemId);
+                    ItemNameTextView.setText(ItemName);
+                    onlineTimeTextView.setText("預計上線："+OnlineDate);
+                    quantityTextView.setText("生產數量："+Qty);
+                    startTimeTextView.setText("計劃開始："+CreatedAt.substring(11,CreatedAt.length()-3));
+                    finishTimeTextView.setText("生產結束：" + UpdatedAt.substring(11,UpdatedAt.length()-3));
+                    TechRoutingNameTextView.setText(TechRoutingName);
                     stateTextView.setText("生效");
                     stateTextView.setTextColor(Color.parseColor("#36BC5C"));
                 }
