@@ -18,6 +18,7 @@ import com.example.aps_test.instance.GetAfterData;
 import com.example.aps_test.instance.GetCurrentStageData;
 import com.example.aps_test.instance.GetPrevMfgData;
 import com.example.aps_test.instance.GetROMData;
+import com.example.aps_test.instance.GetSaleOrder;
 import com.example.aps_test.sharedPreferences.SP;
 import com.example.aps_test.ui.scheduleResult.resultFragment.ResultViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
@@ -41,6 +42,7 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
     private GetROMData getROMData;
     private GetAfterData getAfterData;
     private GetCurrentStageData getCurrentStageData;
+    private GetSaleOrder getSaleOrder;
 
     private String[] title= {"前關製令","本階製令","後關製令","裝配製令","銷售訂單"};
     private String[] theme= {"當日進度表","進度表查詢"};
@@ -49,6 +51,7 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
     ArrayList<HashMap<String,String>> ROMarrayList = new ArrayList<>();
     ArrayList<HashMap<String,String>> AfterarrayList = new ArrayList<>();
     ArrayList<HashMap<String,String>> CurrentStagearrayList = new ArrayList<>();
+    ArrayList<HashMap<String,String>> SaleOrderarrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +114,10 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
                 getCurrentStageData = GetCurrentStageData.getInstance();
                 CurrentStagearrayList = getCurrentStageData.getCurrentStageArrayList();
                 Log.e("ScheduleResultActivity", "getCurrentStageArrayList: " + CurrentStagearrayList);
+
+                getSaleOrder = GetSaleOrder.getInstance();
+                SaleOrderarrayList = getSaleOrder.getSaleOrderArrayList();
+                Log.e("ScheduleResultActivity", "getSaleOrderArrayList: " + SaleOrderarrayList);
 
                 ///////////////////////////////////////////////////////////
                 if(position == 0){
@@ -215,11 +222,21 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
                 }
 
                 else{
-                    MoIdTextView.setText("1SO1811270009");
+                    String sale_order = CurrentStagearrayList.get(0).get("SoId");
+                    String item_id = SaleOrderarrayList.get(0).get("Item_id");
+                    String customer_name = SaleOrderarrayList.get(0).get("Customer_name");
+                    String qty = SaleOrderarrayList.get(0).get("Qty");
+                    String person_id = SaleOrderarrayList.get(0).get("Person_id");
+                    String created_at = SaleOrderarrayList.get(0).get("Created_at");
+                    String updated_at = SaleOrderarrayList.get(0).get("Updated_at");
+
+
+                    MoIdTextView.setText(sale_order);
                     SoIdTextView.setText(" ");
-                    ItemIdTextView.setText("客戶名稱：(M1315) MATADOR  GmbH");
+                    ItemIdTextView.setTextColor(Color.parseColor("#FF000000"));
+                    ItemIdTextView.setText("客戶名稱：(M1315)" + customer_name);
                     ItemNameTextView.setText("客戶訂單：6003028");
-                    onlineTimeTextView.setText("業務人員：(M3049) 嚴卉婷");
+                    onlineTimeTextView.setText("業務人員：("+ person_id +") 嚴卉婷");
                     quantityTextView.setText(" ");
                     startTimeTextView.setText(" ");
                     finishTimeTextView.setText(" ");

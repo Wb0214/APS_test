@@ -20,10 +20,12 @@ import com.example.aps_test.api.response.AfterMfgResponse;
 import com.example.aps_test.api.response.CurrentStageResponse;
 import com.example.aps_test.api.response.PrevMfgResponse;
 import com.example.aps_test.api.response.ROMResponse;
+import com.example.aps_test.api.response.SaleOrderResponse;
 import com.example.aps_test.instance.GetAfterData;
 import com.example.aps_test.instance.GetCurrentStageData;
 import com.example.aps_test.instance.GetPrevMfgData;
 import com.example.aps_test.instance.GetROMData;
+import com.example.aps_test.instance.GetSaleOrder;
 import com.example.aps_test.sharedPreferences.SP;
 import com.example.aps_test.ui.scheduleResult.ScheduleResultActivity;
 
@@ -42,6 +44,7 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
     ArrayList<HashMap<String,String>> ROMarrayList = new ArrayList<>();
     ArrayList<HashMap<String,String>> AfterarrayList = new ArrayList<>();
     ArrayList<HashMap<String,String>> CurrentStagearrayList = new ArrayList<>();
+    ArrayList<HashMap<String,String>> SaleOrderarrayList = new ArrayList<>();
 
     private Activity activity;
     private SP sp;
@@ -50,6 +53,7 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
     private GetROMData getROMData;
     private GetAfterData getAfterData;
     private GetCurrentStageData getCurrentStageData;
+    private GetSaleOrder getSaleOrder;
 
     private ApiClient apiClient;
     private ApiService apiService;
@@ -109,7 +113,7 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
         holder.takeEffectTextView.setText(arrayList.get(position).get("takeEffect"));
 
         holder.mView.setOnClickListener((v)->{
-            GetPrevMfg(arrayList.get(position).get("so_id"),arrayList.get(position).get("item_id"),sp.loadToken(),position);
+            GetPrevMfg(arrayList.get(position).get("so_id"),arrayList.get(position).get("item_id"),sp.loadToken());
 
             Intent intent = new Intent(activity, ScheduleResultActivity.class);
             intent.putExtra("THEME_EXTRA",1);
@@ -122,7 +126,7 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
         return arrayList.size();
     }
 
-    public void GetPrevMfg(String so_id,String item_id,String token,int position){
+    public void GetPrevMfg(String so_id,String item_id,String token){
         apiService.getPrevMfg(so_id,item_id,token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -140,22 +144,24 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                         arrayList.clear();
 
                         if(size != 0){
-                            HashMap<String,String> hashMap = new HashMap<>();
-                            hashMap.put("Num", String.valueOf(position));
-                            hashMap.put("MoId",listResponse.body().get(0).MoId());
-                            hashMap.put("SoId",listResponse.body().get(0).SoId());
-                            hashMap.put("ItemId",listResponse.body().get(0).ItemId());
-                            hashMap.put("ItemName",listResponse.body().get(0).ItemName());
-                            hashMap.put("OnlineDate",listResponse.body().get(0).OnlineDate());
-                            hashMap.put("Qty",listResponse.body().get(0).Qty());
-                            hashMap.put("CompleteDate",listResponse.body().get(0).CompleteDate());
-                            hashMap.put("TechRoutingName",listResponse.body().get(0).TechRoutingName());
-                            hashMap.put("CreatedAt",listResponse.body().get(0).CreatedAt());
-                            hashMap.put("UpdatedAt",listResponse.body().get(0).UpdatedAt());
+                            for(int i=0;i<size;i++){
+                                HashMap<String,String> hashMap = new HashMap<>();
+                                hashMap.put("Num", String.valueOf(i+1));
+                                hashMap.put("MoId",listResponse.body().get(0).MoId());
+                                hashMap.put("SoId",listResponse.body().get(0).SoId());
+                                hashMap.put("ItemId",listResponse.body().get(0).ItemId());
+                                hashMap.put("ItemName",listResponse.body().get(0).ItemName());
+                                hashMap.put("OnlineDate",listResponse.body().get(0).OnlineDate());
+                                hashMap.put("Qty",listResponse.body().get(0).Qty());
+                                hashMap.put("CompleteDate",listResponse.body().get(0).CompleteDate());
+                                hashMap.put("TechRoutingName",listResponse.body().get(0).TechRoutingName());
+                                hashMap.put("CreatedAt",listResponse.body().get(0).CreatedAt());
+                                hashMap.put("UpdatedAt",listResponse.body().get(0).UpdatedAt());
 
-                            arrayList.add(hashMap);
+                                arrayList.add(hashMap);
+                            }
                             getPrevMfgData.setPrevMfgArrayList(arrayList);
-                            GetROM(listResponse.body().get(0).ItemId(),sp.loadToken(),position,listResponse.body().get(0).SoId());
+                            GetROM(listResponse.body().get(0).ItemId(),sp.loadToken(),listResponse.body().get(0).SoId());
                         }
                         else{
                             Toast.makeText(activity, "查無資料", Toast.LENGTH_SHORT).show();
@@ -177,7 +183,7 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                 });
     }
 
-    public void GetROM(String item_id, String token, int position, String sale_order){
+    public void GetROM(String item_id, String token, String sale_order){
         apiService.getBOM(item_id,token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -195,8 +201,9 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                         ROMarrayList.clear();
 
                         if(size != 0){
+                            for (int i=0;i<size;i++){
                             HashMap<String,String> hashMap = new HashMap<>();
-                            hashMap.put("Num", String.valueOf(position));
+                            hashMap.put("Num", String.valueOf(i+1));
                             hashMap.put("UnitId",listResponse.body().get(0).UnitId());
                             hashMap.put("UnitQty",listResponse.body().get(0).UnitQty());
                             hashMap.put("BaseQty",listResponse.body().get(0).BaseQty());
@@ -207,8 +214,9 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                             hashMap.put("DownId",listResponse.body().get(0).DownId());
 
                             ROMarrayList.add(hashMap);
+                            }
                             getROMData.setROMArrayList(ROMarrayList);
-                            GetAfterMfg(sale_order,listResponse.body().get(0).DownId(),sp.loadToken(),position);
+                            GetAfterMfg(sale_order,listResponse.body().get(0).DownId(),sp.loadToken());
                         }
                         else{
                             Toast.makeText(activity, "查無資料", Toast.LENGTH_SHORT).show();
@@ -229,7 +237,7 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                 });
     }
 
-    public void GetAfterMfg(String sale_order, String id, String token, int position){
+    public void GetAfterMfg(String sale_order, String id, String token){
         apiService.getAfterMfg(sale_order,id,token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -247,24 +255,26 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                         AfterarrayList.clear();
 
                         if(size != 0){
-                            HashMap<String,String> hashMap = new HashMap<>();
-                            hashMap.put("Num", String.valueOf(position));
-                            hashMap.put("ItemId",listResponse.body().get(0).ItemId());
-                            hashMap.put("CreatedAt",listResponse.body().get(0).CreatedAt());
-                            hashMap.put("UpdatedAt",listResponse.body().get(0).UpdatedAt());
-                            hashMap.put("NuseQty",listResponse.body().get(0).NuseQty());
-                            hashMap.put("MoId",listResponse.body().get(0).MoId());
-                            hashMap.put("ItemName",listResponse.body().get(0).ItemName());
-                            hashMap.put("OnlineDate",listResponse.body().get(0).OnlineDate());
-                            hashMap.put("CompleteDate",listResponse.body().get(0).CompleteDate());
-                            hashMap.put("Qty",listResponse.body().get(0).Qty());
-                            hashMap.put("BomkeyName",listResponse.body().get(0).BomkeyName());
-                            hashMap.put("UnitId",listResponse.body().get(0).UnitId());
+                            for (int i=0;i<size;i++) {
+                                HashMap<String, String> hashMap = new HashMap<>();
+                                hashMap.put("Num", String.valueOf(i+1));
+                                hashMap.put("ItemId", listResponse.body().get(0).ItemId());
+                                hashMap.put("CreatedAt", listResponse.body().get(0).CreatedAt());
+                                hashMap.put("UpdatedAt", listResponse.body().get(0).UpdatedAt());
+                                hashMap.put("NuseQty", listResponse.body().get(0).NuseQty());
+                                hashMap.put("MoId", listResponse.body().get(0).MoId());
+                                hashMap.put("ItemName", listResponse.body().get(0).ItemName());
+                                hashMap.put("OnlineDate", listResponse.body().get(0).OnlineDate());
+                                hashMap.put("CompleteDate", listResponse.body().get(0).CompleteDate());
+                                hashMap.put("Qty", listResponse.body().get(0).Qty());
+                                hashMap.put("BomkeyName", listResponse.body().get(0).BomkeyName());
+                                hashMap.put("UnitId", listResponse.body().get(0).UnitId());
 
-                            Log.d("getAfterMfg", "onNext: "+listResponse.body().get(0).ItemId());
-                            AfterarrayList.add(hashMap);
+                                Log.d("getAfterMfg", "onNext: " + listResponse.body().get(0).ItemId());
+                                AfterarrayList.add(hashMap);
+                            }
                             getAfterData.setAfterArrayList(AfterarrayList);
-                            GetCurrentStage(sale_order,listResponse.body().get(0).ItemId(),sp.loadToken(),position);
+                            GetCurrentStage(sale_order,listResponse.body().get(0).ItemId(),sp.loadToken());
                         }
                         else{
                             Toast.makeText(activity, "查無資料", Toast.LENGTH_SHORT).show();
@@ -284,7 +294,7 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                 });
     }
 
-    public void GetCurrentStage(String sale_order,String item,String token,int position){
+    public void GetCurrentStage(String sale_order,String item,String token){
         apiService.getCurrentStage(sale_order,item,token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -301,23 +311,25 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                         getCurrentStageData = GetCurrentStageData.getInstance();
                         CurrentStagearrayList.clear();
 
-                        HashMap<String,String> hashMap = new HashMap<>();
-                        hashMap.put("Num", String.valueOf(position));
-                        hashMap.put("MoId",listResponse.body().MoId());
-                        hashMap.put("ItemId",listResponse.body().ItemId());
-                        hashMap.put("ItemName",listResponse.body().ItemName());
-                        hashMap.put("CreatedAt",listResponse.body().CreatedAt());
-                        hashMap.put("UpdatedAt",listResponse.body().UpdatedAt());
-                        hashMap.put("SoId",listResponse.body().SoId());
-                        hashMap.put("OnlineDate",listResponse.body().OnlineDate());
-                        hashMap.put("CompleteDate",listResponse.body().CompleteDate());
-                        hashMap.put("Qty",listResponse.body().Qty());
-                        hashMap.put("TechRouteName",listResponse.body().TechRouteName());
+                        for(int i=0;i<1;i++) {
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("Num", String.valueOf(i+1));
+                            hashMap.put("MoId", listResponse.body().MoId());
+                            hashMap.put("ItemId", listResponse.body().ItemId());
+                            hashMap.put("ItemName", listResponse.body().ItemName());
+                            hashMap.put("CreatedAt", listResponse.body().CreatedAt());
+                            hashMap.put("UpdatedAt", listResponse.body().UpdatedAt());
+                            hashMap.put("SoId", listResponse.body().SoId());
+                            hashMap.put("OnlineDate", listResponse.body().OnlineDate());
+                            hashMap.put("CompleteDate", listResponse.body().CompleteDate());
+                            hashMap.put("Qty", listResponse.body().Qty());
+                            hashMap.put("TechRouteName", listResponse.body().TechRouteName());
 
-                        Log.d("getCurrentStageMfg", "onNext: "+listResponse.body());
-                        CurrentStagearrayList.add(hashMap);
+                            Log.d("getCurrentStageMfg", "onNext: " + listResponse.body());
+                            CurrentStagearrayList.add(hashMap);
+                        }
                         getCurrentStageData.setCurrentStageArrayList(CurrentStagearrayList);
-
+                        GetSaleOrder(sale_order,"","",token);
                     }
 
                     @Override
@@ -328,6 +340,56 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                     @Override
                     public void onComplete() {
                         Log.d("getCurrentStage", "onComplete");
+                    }
+                });
+    }
+
+    public void GetSaleOrder(String sale_order,String customer,String online_date,String token){
+        apiService.getSaleOrder(sale_order,customer,online_date,token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<List<SaleOrderResponse>>>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@io.reactivex.rxjava3.annotations.NonNull Response<List<SaleOrderResponse>> listResponse) {
+                        getSaleOrder = GetSaleOrder.getInstance();
+                        int size = listResponse.body().size();
+                        SaleOrderarrayList.clear();
+
+                        if(size != 0){
+                            for(int i=0;i<size;i++){
+                                HashMap<String,String> hashMap = new HashMap<>();
+                                hashMap.put("Num", String.valueOf(i+1));
+                                hashMap.put("Item_id",listResponse.body().get(0).getItem_id());
+                                hashMap.put("Created_at",listResponse.body().get(0).getCreated_at());
+                                hashMap.put("Updated_at",listResponse.body().get(0).getUpdated_at());
+                                hashMap.put("Item",listResponse.body().get(0).getItem());
+                                hashMap.put("Customer_name",listResponse.body().get(0).getCustomer_name());
+                                hashMap.put("Qty",listResponse.body().get(0).getQty());
+                                hashMap.put("Person_id",listResponse.body().get(0).getPerson_id());
+
+                                SaleOrderarrayList.add(hashMap);
+                            }
+                            getSaleOrder.setSaleOrderArrayList(SaleOrderarrayList);
+                        }
+                        else{
+                            Toast.makeText(activity, "查無資料", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        Log.d("getSaleOrder", "onError: " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("getSaleOrder", "onComplete");
                     }
                 });
     }

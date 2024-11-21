@@ -11,7 +11,7 @@ public class GetAfterData {
 
     public static GetAfterData getInstance() {
         if (instance == null) {
-            synchronized (GetPrevMfgData.class) { // 確保線程安全
+            synchronized (GetAfterData.class) { // 確保線程安全
                 if (instance == null) {
                     instance = new GetAfterData();
                 }

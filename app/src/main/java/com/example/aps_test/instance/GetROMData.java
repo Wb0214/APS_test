@@ -11,7 +11,7 @@ public class GetROMData {
 
     public static GetROMData getInstance() {
         if (instance == null) {
-            synchronized (GetPrevMfgData.class) { // 確保線程安全
+            synchronized (GetROMData.class) { // 確保線程安全
                 if (instance == null) {
                     instance = new GetROMData();
                 }

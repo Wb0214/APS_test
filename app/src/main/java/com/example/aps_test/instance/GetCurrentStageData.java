@@ -11,7 +11,7 @@ public class GetCurrentStageData {
 
     public static GetCurrentStageData getInstance() {
         if (instance == null) {
-            synchronized (GetPrevMfgData.class) { // 確保線程安全
+            synchronized (GetCurrentStageData.class) { // 確保線程安全
                 if (instance == null) {
                     instance = new GetCurrentStageData();
                 }
