@@ -11,11 +11,15 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.APS_test.R;
+import com.example.aps_test.instance.GetPrevMfgData;
+import com.example.aps_test.instance.GetROMData;
 import com.example.aps_test.ui.scheduleResult.resultFragment.resultAdapter.NowAdapter;
 
 import java.util.ArrayList;
@@ -25,6 +29,9 @@ public class NowFragment extends Fragment {
     private Context context;
     private RecyclerView nowRecyclerView;
     NowAdapter nowAdapter;
+    private GetROMData getROMData;
+    private TextView MoIdTextView, SoIdTextView, ItemIdTextView,
+            ItemNameTextView,quantityTextView,startTimeTextView, finishTimeTextView;
 
     ArrayList<HashMap<String, String>> marrayList = new ArrayList<>();
 
@@ -59,16 +66,29 @@ public class NowFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         nowRecyclerView = view.findViewById(R.id.before_list_rv);
+        MoIdTextView = view.findViewById(R.id.before_Moid_tv);
+        SoIdTextView = view.findViewById(R.id.before_Soid_tv);
+        ItemIdTextView = view.findViewById(R.id.before_itemId_tv);
+        ItemNameTextView = view.findViewById(R.id.before_ItemName_tv);
+        quantityTextView = view.findViewById(R.id.before_Qty_tv);
+        startTimeTextView = view.findViewById(R.id.before_StartTime_tv);
+        finishTimeTextView = view.findViewById(R.id.before_EndTime_tv);
+
+        getROMData = GetROMData.getInstance();
+        marrayList = getROMData.getROMArrayList();
+        Log.e("NowFragment", "getROMArrayList: " + marrayList);
 
         nowRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         nowRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         nowAdapter = new NowAdapter(marrayList, context);
         nowRecyclerView.setAdapter(nowAdapter);
 
+//        MoIdTextView.setText("製令單號: "+prevMfgarrayList.get(0).get("MoId"));
+//        SoIdTextView.setText("來源訂單:"+prevMfgarrayList.get(0).get("SoId"));
+//        ItemIdTextView.setText("母件編號: "+prevMfgarrayList.get(0).get("ItemId"));;
+//        startTimeTextView.setText("預開工日: "+prevMfgarrayList.get(0).get("OnlineDate"));
+//        finishTimeTextView.setText("預完工日: "+prevMfgarrayList.get(0).get("CompleteDate"));
+
     }
 
-//    @Override
-//    public void getData(ArrayList arrayList){
-//        marrayList = arrayList;
-//    }
 }

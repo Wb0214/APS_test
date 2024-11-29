@@ -204,7 +204,7 @@ public class ScheduleResultActivity extends AppCompatActivity implements Schedul
                     String OnlineDate = CurrentStagearrayList.get(0).get("OnlineDate");
                     String CompleteDate = CurrentStagearrayList.get(0).get("CompleteDate");
                     String Qty = CurrentStagearrayList.get(0).get("Qty");
-                    String TechRoutingName = CurrentStagearrayList.get(0).get("TechRoutingName");
+                    String TechRoutingName = CurrentStagearrayList.get(0).get("Tech_routing_name");
                     String CreatedAt = CurrentStagearrayList.get(0).get("CreatedAt");
                     String UpdatedAt = CurrentStagearrayList.get(0).get("UpdatedAt");
 

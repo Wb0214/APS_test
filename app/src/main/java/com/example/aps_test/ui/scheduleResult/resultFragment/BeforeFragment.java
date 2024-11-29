@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.APS_test.R;
+import com.example.aps_test.instance.GetAfterData;
 import com.example.aps_test.instance.GetPrevMfgData;
 import com.example.aps_test.ui.scheduleResult.resultFragment.resultAdapter.BeforeAdapter;
 
@@ -25,7 +27,7 @@ import java.util.HashMap;
 
 public class BeforeFragment extends Fragment {
     private Context context;
-    private GetPrevMfgData getPrevMfgData;
+    private GetAfterData getAfterData;
     private RecyclerView beforeRecyclerView;
     BeforeAdapter beforeAdapter;
     private TextView MoIdTextView, SoIdTextView, ItemIdTextView,
@@ -72,25 +74,22 @@ public class BeforeFragment extends Fragment {
         startTimeTextView = view.findViewById(R.id.before_StartTime_tv);
         finishTimeTextView = view.findViewById(R.id.before_EndTime_tv);
 
-        getPrevMfgData = GetPrevMfgData.getInstance();
-        marrayList = getPrevMfgData.getPrevMfgArrayList();
+        getAfterData = GetAfterData.getInstance();
+        marrayList = getAfterData.getAfterArrayList();
+        Log.d("BeforeFragment", "onViewCreated: "+marrayList);
 
         beforeRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         beforeRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         beforeAdapter = new BeforeAdapter(marrayList, context);
         beforeRecyclerView.setAdapter(beforeAdapter);
 
-        MoIdTextView.setText("製令單號: "+marrayList.get(0).get("MoId"));
-        SoIdTextView.setText("來源訂單:"+marrayList.get(0).get("SoId"));
-        ItemIdTextView.setText("母件編號: "+marrayList.get(0).get("ItemId"));
-        ItemNameTextView.setText("母件單品:"+marrayList.get(0).get("ItemName"));
-        quantityTextView.setText("生產數量: "+marrayList.get(0).get("Qty"));
-        startTimeTextView.setText("預開工日: "+marrayList.get(0).get("OnlineDate"));
-        finishTimeTextView.setText("預完工日: "+marrayList.get(0).get("CompleteDate"));
+//        MoIdTextView.setText("製令單號: "+marrayList.get(0).get("MoId"));
+//        SoIdTextView.setText("來源訂單:"+marrayList.get(0).get("SoId"));
+//        ItemIdTextView.setText("母件編號: "+marrayList.get(0).get("ItemId"));
+//        ItemNameTextView.setText("母件單品:"+marrayList.get(0).get("ItemName"));
+//        quantityTextView.setText("生產數量: "+marrayList.get(0).get("Qty"));
+//        startTimeTextView.setText("預開工日: "+marrayList.get(0).get("OnlineDate"));
+//        finishTimeTextView.setText("預完工日: "+marrayList.get(0).get("CompleteDate"));
     }
 
-//    @Override
-//    public void getData(ArrayList arrayList){
-//        marrayList = arrayList;
-//    }
 }

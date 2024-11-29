@@ -1,5 +1,7 @@
 package com.example.aps_test.instance;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,9 +29,11 @@ public class GetPrevMfgData {
 
     public void setPrevMfgArrayList(ArrayList arrayList){
         this.PrevMfgArrayList = arrayList;
+        Log.d("setPrevMfgArrayList", "setPrevMfgArrayList: "+arrayList);
     }
 
     public ArrayList getPrevMfgArrayList(){
+        Log.d("getPrevMfgArrayList", "getPrevMfgArrayList: "+PrevMfgArrayList);
         return PrevMfgArrayList;
     }
 

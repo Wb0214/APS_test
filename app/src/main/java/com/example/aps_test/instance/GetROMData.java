@@ -1,5 +1,7 @@
 package com.example.aps_test.instance;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,6 +23,7 @@ public class GetROMData {
     }
 
     public void setROMArrayList(ArrayList arrayList){
+        Log.e("GetROMData", "setROMArrayList: " + arrayList);
         this.ROMArrayList = arrayList;
     }
 

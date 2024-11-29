@@ -11,11 +11,15 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.APS_test.R;
+import com.example.aps_test.instance.GetCurrentStageData;
 import com.example.aps_test.ui.scheduleResult.resultFragment.resultAdapter.AssemblyAdapter;
 
 import java.util.ArrayList;
@@ -24,8 +28,12 @@ import java.util.HashMap;
 
 public class AssemblyFragment extends Fragment {
     private Context context;
+    private GetCurrentStageData getCurrentStageData;
     private RecyclerView AssemblyRecyclerView;
     AssemblyAdapter assemblyAdapter;
+    private TextView MoIdTextView, SoIdTextView, ItemIdTextView,
+            ItemNameTextView,quantityTextView,startTimeTextView, finishTimeTextView;
+
 
     ArrayList<HashMap<String, String>> marrayList = new ArrayList<>();
 
@@ -60,10 +68,21 @@ public class AssemblyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         AssemblyRecyclerView = view.findViewById(R.id.before_list_rv);
+        MoIdTextView = view.findViewById(R.id.before_Moid_tv);
+        SoIdTextView = view.findViewById(R.id.before_Soid_tv);
+        ItemIdTextView = view.findViewById(R.id.before_itemId_tv);
+        ItemNameTextView = view.findViewById(R.id.before_ItemName_tv);
+        quantityTextView = view.findViewById(R.id.before_Qty_tv);
+        startTimeTextView = view.findViewById(R.id.before_StartTime_tv);
+        finishTimeTextView = view.findViewById(R.id.before_EndTime_tv);
+
+        getCurrentStageData = GetCurrentStageData.getInstance();
+        marrayList = getCurrentStageData.getCurrentStageArrayList();
+        Log.d("AssemblyFragment", "onViewCreated: "+marrayList);
 
         AssemblyRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         AssemblyRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
-        assemblyAdapter = new AssemblyAdapter(marrayList, context);
+        assemblyAdapter = new AssemblyAdapter(marrayList,context);
         AssemblyRecyclerView.setAdapter(assemblyAdapter);
     }
 }

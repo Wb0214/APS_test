@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.APS_test.R;
+import com.example.aps_test.instance.GetAfterData;
 import com.example.aps_test.instance.GetPrevMfgData;
 import com.example.aps_test.ui.second.production.firstsearch.search_schedule.SearchScheduleAdapter;
 
@@ -20,7 +21,7 @@ import java.util.HashMap;
 public class BeforeAdapter extends RecyclerView.Adapter<BeforeAdapter.ViewHolder> {
     ArrayList<HashMap<String,String>> arrayList = new ArrayList<>();
     private Context context;
-    private GetPrevMfgData getPrevMfgData;
+    private GetAfterData getAfterData;
 
     public BeforeAdapter(ArrayList<HashMap<String, String>> marrayList, Context context) {
         this.arrayList = marrayList;
@@ -55,17 +56,17 @@ public class BeforeAdapter extends RecyclerView.Adapter<BeforeAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull BeforeAdapter.ViewHolder holder, int position) {
-        getPrevMfgData = GetPrevMfgData.getInstance();
-        arrayList = getPrevMfgData.getPrevMfgArrayList();
+        getAfterData = GetAfterData.getInstance();
+        arrayList = getAfterData.getAfterArrayList();
+        Log.d("BeforeAdapter", "onBindViewHolder: "+arrayList);
 
         holder.numTextView.setText(arrayList.get(position).get("Num"));
         holder.ItemIdTextView.setText(arrayList.get(position).get("ItemId"));
         holder.ItemNameTextView.setText(arrayList.get(position).get("ItemName"));
         holder.quantityTextView.setText(arrayList.get(position).get("Qty"));
-        holder.usequantityTextView.setText("1");
-        holder.nuitTextView.setText("PCS");
+        holder.usequantityTextView.setText(arrayList.get(position).get("NuseQty"));
+        holder.nuitTextView.setText(arrayList.get(position).get("UnitId"));
         holder.directionsTextView.setText("");
-
     }
 
     @Override
