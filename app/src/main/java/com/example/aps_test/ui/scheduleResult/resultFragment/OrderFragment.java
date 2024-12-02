@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.APS_test.R;
+import com.example.aps_test.instance.GetPrevMfgData;
 import com.example.aps_test.instance.GetSaleOrder;
 import com.example.aps_test.ui.scheduleResult.resultFragment.resultAdapter.OrderAdapter;
 
@@ -30,10 +31,12 @@ public class OrderFragment extends Fragment {
     private RecyclerView OrderRecyclerView;
     OrderAdapter orderAdapter;
     private GetSaleOrder getSaleOrder;
-    private TextView MoIdTextView, SoIdTextView, ItemIdTextView,
-            ItemNameTextView,quantityTextView,startTimeTextView, finishTimeTextView;
+    private GetPrevMfgData getPrevMfgData;
+    private TextView DateTextView, PersonTextView, CustomerNameTextView,
+            SoIdTextView,PersonIdTextView;
 
     ArrayList<HashMap<String, String>> marrayList = new ArrayList<>();
+    ArrayList<HashMap<String, String>> PrevMfgarrayList = new ArrayList<>();
 
     public OrderFragment(Context context) {
         this.context = context;
@@ -66,26 +69,29 @@ public class OrderFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         OrderRecyclerView = view.findViewById(R.id.order_list_tv);
-        MoIdTextView = view.findViewById(R.id.before_Moid_tv);
-        SoIdTextView = view.findViewById(R.id.before_Soid_tv);
-        ItemIdTextView = view.findViewById(R.id.before_itemId_tv);
-        ItemNameTextView = view.findViewById(R.id.before_ItemName_tv);
-        quantityTextView = view.findViewById(R.id.before_Qty_tv);
-        startTimeTextView = view.findViewById(R.id.before_StartTime_tv);
-        finishTimeTextView = view.findViewById(R.id.before_EndTime_tv);
+        DateTextView = view.findViewById(R.id.order_TwoMainData_tv);
+        PersonTextView = view.findViewById(R.id.order_CustomterName_tv);
+        CustomerNameTextView = view.findViewById(R.id.order_company_tv);
+        SoIdTextView = view.findViewById(R.id.order_TwoMainNu_tv);
+        PersonIdTextView = view.findViewById(R.id.order_people_tv);
 
         getSaleOrder = GetSaleOrder.getInstance();
         marrayList = getSaleOrder.getSaleOrderArrayList();
         Log.d("OrderFragment", "onViewCreated: "+marrayList);
+        getPrevMfgData = GetPrevMfgData.getInstance();
+        PrevMfgarrayList = getPrevMfgData.getPrevMfgArrayList();
 
         OrderRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         OrderRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         orderAdapter = new OrderAdapter(marrayList, context);
         OrderRecyclerView.setAdapter(orderAdapter);
-    }
 
-//    @Override
-//    public void getData(ArrayList arrayList){
-//        marrayList = arrayList;
-//    }
+
+        SoIdTextView.setText(PrevMfgarrayList.get(0).get("SoId"));
+//        if(marrayList.size()>0 || marrayList != null){
+//            DateTextView.setText(marrayList.get(0).get("Created_at").substring(0,10));
+//            CustomerNameTextView.setText(marrayList.get(0).get("Customer_name"));
+//            PersonIdTextView.setText(marrayList.get(0).get("Person_id"));
+//        }
+    }
 }

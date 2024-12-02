@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.APS_test.R;
 import com.example.aps_test.instance.GetCurrentStageData;
+import com.example.aps_test.instance.GetPrevMfgData;
 import com.example.aps_test.ui.scheduleResult.resultFragment.resultAdapter.AssemblyAdapter;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import java.util.HashMap;
 public class AssemblyFragment extends Fragment {
     private Context context;
     private GetCurrentStageData getCurrentStageData;
+    private GetPrevMfgData getPrevMfgData;
     private RecyclerView AssemblyRecyclerView;
     AssemblyAdapter assemblyAdapter;
     private TextView MoIdTextView, SoIdTextView, ItemIdTextView,
@@ -36,6 +38,7 @@ public class AssemblyFragment extends Fragment {
 
 
     ArrayList<HashMap<String, String>> marrayList = new ArrayList<>();
+    ArrayList<HashMap<String, String>> PrevMfgarrayList = new ArrayList<>();
 
     public AssemblyFragment(Context context) {
         this.context = context;
@@ -79,10 +82,21 @@ public class AssemblyFragment extends Fragment {
         getCurrentStageData = GetCurrentStageData.getInstance();
         marrayList = getCurrentStageData.getCurrentStageArrayList();
         Log.d("AssemblyFragment", "onViewCreated: "+marrayList);
+        getPrevMfgData = GetPrevMfgData.getInstance();
+        PrevMfgarrayList = getPrevMfgData.getPrevMfgArrayList();
 
         AssemblyRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         AssemblyRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         assemblyAdapter = new AssemblyAdapter(marrayList,context);
         AssemblyRecyclerView.setAdapter(assemblyAdapter);
+
+        MoIdTextView.setText("製令單號: "+PrevMfgarrayList.get(0).get("MoId"));
+        SoIdTextView.setText("來源訂單:"+PrevMfgarrayList.get(0).get("SoId"));
+        ItemIdTextView.setText("母件編號: "+PrevMfgarrayList.get(0).get("ItemId"));
+        ItemNameTextView.setText("母件單品:"+PrevMfgarrayList.get(0).get("ItemName"));
+        quantityTextView.setText("生產數量: "+PrevMfgarrayList.get(0).get("Qty"));
+        startTimeTextView.setText("預開工日: "+PrevMfgarrayList.get(0).get("OnlineDate"));
+        finishTimeTextView.setText("預完工日: "+PrevMfgarrayList.get(0).get("CompleteDate"));
+
     }
 }

@@ -171,7 +171,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="0.39"
                             android:gravity="left|center"
-                            android:text="客戶訂單:"
+                            android:text="客戶訂單: 6003028"
                             android:textSize="10sp"/>
                     </LinearLayout>
 

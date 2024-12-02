@@ -28,12 +28,14 @@ import java.util.HashMap;
 public class BeforeFragment extends Fragment {
     private Context context;
     private GetAfterData getAfterData;
+    private GetPrevMfgData getPrevMfgData;
     private RecyclerView beforeRecyclerView;
     BeforeAdapter beforeAdapter;
     private TextView MoIdTextView, SoIdTextView, ItemIdTextView,
             ItemNameTextView,quantityTextView,startTimeTextView, finishTimeTextView;
 
     ArrayList<HashMap<String, String>> marrayList = new ArrayList<>();
+    ArrayList<HashMap<String, String>> PrevMfgarrayList = new ArrayList<>();
 
     public BeforeFragment(Context context) {
         this.context = context;
@@ -77,19 +79,22 @@ public class BeforeFragment extends Fragment {
         getAfterData = GetAfterData.getInstance();
         marrayList = getAfterData.getAfterArrayList();
         Log.d("BeforeFragment", "onViewCreated: "+marrayList);
+        getPrevMfgData = GetPrevMfgData.getInstance();
+        PrevMfgarrayList = getPrevMfgData.getPrevMfgArrayList();
+
+
+        MoIdTextView.setText("製令單號: "+PrevMfgarrayList.get(0).get("MoId"));
+        SoIdTextView.setText("來源訂單:"+PrevMfgarrayList.get(0).get("SoId"));
+        ItemIdTextView.setText("母件編號: "+PrevMfgarrayList.get(0).get("ItemId"));
+        ItemNameTextView.setText("母件單品:"+PrevMfgarrayList.get(0).get("ItemName"));
+        quantityTextView.setText("生產數量: "+PrevMfgarrayList.get(0).get("Qty"));
+        startTimeTextView.setText("預開工日: "+PrevMfgarrayList.get(0).get("OnlineDate"));
+        finishTimeTextView.setText("預完工日: "+PrevMfgarrayList.get(0).get("CompleteDate"));
 
         beforeRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         beforeRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         beforeAdapter = new BeforeAdapter(marrayList, context);
         beforeRecyclerView.setAdapter(beforeAdapter);
-
-//        MoIdTextView.setText("製令單號: "+marrayList.get(0).get("MoId"));
-//        SoIdTextView.setText("來源訂單:"+marrayList.get(0).get("SoId"));
-//        ItemIdTextView.setText("母件編號: "+marrayList.get(0).get("ItemId"));
-//        ItemNameTextView.setText("母件單品:"+marrayList.get(0).get("ItemName"));
-//        quantityTextView.setText("生產數量: "+marrayList.get(0).get("Qty"));
-//        startTimeTextView.setText("預開工日: "+marrayList.get(0).get("OnlineDate"));
-//        finishTimeTextView.setText("預完工日: "+marrayList.get(0).get("CompleteDate"));
     }
 
 }
