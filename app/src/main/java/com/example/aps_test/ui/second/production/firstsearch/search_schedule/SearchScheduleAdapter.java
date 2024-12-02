@@ -142,7 +142,6 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                         int size = listResponse.body().size();
                         PrevMfgarrayList.clear();
 
-                        if(size != 0){
                             for(int i=0;i<size;i++){
                                 HashMap<String,String> hashMap = new HashMap<>();
                                 hashMap.put("Num", String.valueOf(i+1));
@@ -162,12 +161,6 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                             getPrevMfgData.setPrevMfgArrayList(PrevMfgarrayList);
                             Log.d("GetPrevMfg", "onNext: "+PrevMfgarrayList);
                             GetROM(listResponse.body().get(0).ItemId(),sp.loadToken(),listResponse.body().get(0).SoId());
-                        }
-                        else{
-                            Toast.makeText(activity, "查無資料", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
                     }
 
                     @Override
@@ -199,7 +192,7 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                         int size = listResponse.body().size();
                         ROMarrayList.clear();
 
-                        if(size != 0){
+
                             for (int i=0;i<size;i++){
                             HashMap<String,String> hashMap = new HashMap<>();
                             hashMap.put("Num", String.valueOf(i+1));
@@ -219,11 +212,7 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                             getROMData.setROMArrayList(ROMarrayList);
                             Log.d("GetROMMfg", "onNext: "+ROMarrayList);
                             GetAfterMfg(sale_order,listResponse.body().get(0).DownId(),sp.loadToken());
-                        }
-                        else{
-                            Toast.makeText(activity, "查無資料", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
+
                     }
 
                     @Override
@@ -255,32 +244,28 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                         int size = listResponse.body().size();
                         AfterarrayList.clear();
 
-                        if(size != 0){
                             for (int i=0;i<size;i++) {
                                 HashMap<String, String> hashMap = new HashMap<>();
                                 hashMap.put("Num", String.valueOf(i+1));
-                                hashMap.put("ItemId", listResponse.body().get(0).ItemId());
-                                hashMap.put("CreatedAt", listResponse.body().get(0).CreatedAt());
-                                hashMap.put("UpdatedAt", listResponse.body().get(0).UpdatedAt());
-                                hashMap.put("NuseQty", listResponse.body().get(0).NuseQty());
-                                hashMap.put("MoId", listResponse.body().get(0).MoId());
-                                hashMap.put("ItemName", listResponse.body().get(0).ItemName());
-                                hashMap.put("OnlineDate", listResponse.body().get(0).OnlineDate());
-                                hashMap.put("CompleteDate", listResponse.body().get(0).CompleteDate());
-                                hashMap.put("Qty", listResponse.body().get(0).Qty());
-                                hashMap.put("BomkeyName", listResponse.body().get(0).BomkeyName());
-                                hashMap.put("UnitId", listResponse.body().get(0).UnitId());
+                                hashMap.put("ItemId", listResponse.body().get(i).ItemId());
+                                hashMap.put("CreatedAt", listResponse.body().get(i).CreatedAt());
+                                hashMap.put("UpdatedAt", listResponse.body().get(i).UpdatedAt());
+                                hashMap.put("NuseQty", listResponse.body().get(i).NuseQty());
+                                hashMap.put("MoId", listResponse.body().get(i).MoId());
+                                hashMap.put("ItemName", listResponse.body().get(i).ItemName());
+                                hashMap.put("OnlineDate", listResponse.body().get(i).OnlineDate());
+                                hashMap.put("CompleteDate", listResponse.body().get(i).CompleteDate());
+                                hashMap.put("Qty", listResponse.body().get(i).Qty());
+                                hashMap.put("BomkeyName", listResponse.body().get(i).BomkeyName());
+                                hashMap.put("UnitId", listResponse.body().get(i).UnitId());
 
                                 Log.d("getAfterMfg", "onNext: " + listResponse.body().get(0).ItemId());
                                 AfterarrayList.add(hashMap);
                             }
                             getAfterData.setAfterArrayList(AfterarrayList);
                             GetCurrentStage(sale_order,listResponse.body().get(0).ItemId(),sp.loadToken());
-                        }
-                        else{
-                            Toast.makeText(activity, "查無資料", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
+
+
                     }
 
                     @Override
@@ -311,10 +296,11 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                     public void onNext(@io.reactivex.rxjava3.annotations.NonNull Response<CurrentStageResponse> listResponse) {
                         getCurrentStageData = GetCurrentStageData.getInstance();
                         CurrentStagearrayList.clear();
+                        int size = listResponse.body().getSize();
 
-                        for(int i=0;i<1;i++) {
+                        for (int i = 0; i < size; i++) {
                             HashMap<String, String> hashMap = new HashMap<>();
-                            hashMap.put("Num", String.valueOf(i+1));
+                            hashMap.put("Num", String.valueOf(i + 1));
                             hashMap.put("MoId", listResponse.body().MoId());
                             hashMap.put("ItemId", listResponse.body().ItemId());
                             hashMap.put("ItemName", listResponse.body().ItemName());
@@ -325,9 +311,14 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                             hashMap.put("CompleteDate", listResponse.body().CompleteDate());
                             hashMap.put("Qty", listResponse.body().Qty());
                             hashMap.put("Tech_routing_name", listResponse.body().TechRouteName());
+                            hashMap.put("UnitId", listResponse.body().related_parent_part.downstream_child.get(i).unit_id);
+                            hashMap.put("UnitQty", listResponse.body().related_parent_part.downstream_child.get(i).unit_qty+".00");
+                            hashMap.put("NuseQty", listResponse.body().related_parent_part.downstream_child.get(i).nuse_qty+".00");
+                            hashMap.put("MaterialId", listResponse.body().related_parent_part.downstream_child.get(i).parent.material_id);
+                            hashMap.put("BomkeyName", listResponse.body().related_parent_part.downstream_child.get(i).parent.bomkey_name);
 
-                            Log.d("getCurrentStageMfg", "onNext: " + listResponse.body());
                             CurrentStagearrayList.add(hashMap);
+                            Log.d("getCurrentStageMfg", "onNext: " + CurrentStagearrayList);
                         }
                         getCurrentStageData.setCurrentStageArrayList(CurrentStagearrayList);
                         GetSaleOrder(sale_order,"","",token);
@@ -358,10 +349,9 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                     @Override
                     public void onNext(@io.reactivex.rxjava3.annotations.NonNull Response<List<SaleOrderResponse>> listResponse) {
                         getSaleOrder = GetSaleOrder.getInstance();
-                        int size = listResponse.body().size();
+                        int size = listResponse.body().get(0).getSize();
                         SaleOrderarrayList.clear();
 
-                        if(size != 0){
                             for(int i=0;i<size;i++){
                                 HashMap<String,String> hashMap = new HashMap<>();
                                 hashMap.put("Num", String.valueOf(i+1));
@@ -372,15 +362,17 @@ public class SearchScheduleAdapter extends RecyclerView.Adapter<SearchScheduleAd
                                 hashMap.put("Customer_name",listResponse.body().get(0).getCustomer_name());
                                 hashMap.put("Qty",listResponse.body().get(0).getQty());
                                 hashMap.put("Person_id",listResponse.body().get(0).getPerson_id());
+                                hashMap.put("UnitQty",listResponse.body().get(0).getUnitQty()+".00");
+                                hashMap.put("NuseQty",listResponse.body().get(0).getNuseQty()+".00");
+                                hashMap.put("MaterialId",listResponse.body().get(0).getMaterialId());
+                                hashMap.put("BomkeyName",listResponse.body().get(0).getBomkeyName());
+                                hashMap.put("Remark",listResponse.body().get(0).getRemark());
+                                hashMap.put("Date",listResponse.body().get(0).getUpdatedAt().substring(0,10));
 
                                 SaleOrderarrayList.add(hashMap);
+                                Log.d("GetSaleOrder", "onNext: "+SaleOrderarrayList);
                             }
                             getSaleOrder.setSaleOrderArrayList(SaleOrderarrayList);
-                        }
-                        else{
-                            Toast.makeText(activity, "查無資料", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
                     }
 
                     @Override

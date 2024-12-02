@@ -59,11 +59,11 @@ public class AssemblyAdapter extends RecyclerView.Adapter<AssemblyAdapter.ViewHo
         Log.d("AssemblyAdapter", "onBindViewHolder: "+arrayList);
 
         holder.numTextView.setText(arrayList.get(position).get("Num"));
-        holder.ItemIdTextView.setText(arrayList.get(position).get("ItemId"));
-        holder.ItemNameTextView.setText(arrayList.get(position).get("ItemName"));
-        holder.quantityTextView.setText(arrayList.get(position).get("Qty"));
-        holder.usequantityTextView.setText(arrayList.get(position).get("Qty"));
-        holder.nuitTextView.setText("APS");
+        holder.ItemIdTextView.setText(arrayList.get(position).get("MaterialId"));
+        holder.ItemNameTextView.setText(arrayList.get(position).get("BomkeyName"));
+        holder.quantityTextView.setText(arrayList.get(position).get("UnitQty"));
+        holder.usequantityTextView.setText(arrayList.get(position).get("NuseQty"));
+        holder.nuitTextView.setText(arrayList.get(position).get("UnitId"));
         holder.directionsTextView.setText("");
 
     }

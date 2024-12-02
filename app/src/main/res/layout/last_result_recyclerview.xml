@@ -16,12 +16,13 @@
             android:id="@+id/lastResultRe_Num_tv"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.1"
             android:text="TextView"/>
 
         <TextView
             android:id="@+id/lastResultRe_ProductNum_tv"
             android:layout_width="0dp"
+            android:textSize="13dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="TextView"/>
@@ -29,6 +30,7 @@
         <TextView
             android:id="@+id/lastResultRe_Product_tv"
             android:layout_width="0dp"
+            android:textSize="13dp"
             android:layout_height="match_parent"
             android:layout_weight="1.2"
             android:text="TextView"/>
@@ -36,6 +38,7 @@
         <TextView
             android:id="@+id/lastResultRe_quantity_tv"
             android:layout_width="0dp"
+            android:textSize="13dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
             android:text="TextView"/>
@@ -50,13 +53,16 @@
         <TextView
             android:id="@+id/lastResultRe_useQuantity_tv"
             android:layout_width="0dp"
+            android:textSize="14dp"
             android:layout_height="match_parent"
+            android:gravity="center|top"
             android:layout_weight="0.4"
             android:text="TextView"/>
 
         <TextView
             android:id="@+id/lastResultRe_data_tv"
             android:layout_width="0dp"
+            android:textSize="14dp"
             android:layout_height="match_parent"
             android:layout_weight="0.4"
             android:text="TextView"/>
@@ -71,7 +77,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.14"
+            android:layout_weight="0.13"
             android:text=""/>
 
         <TextView
@@ -79,7 +85,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="TextView"
+            android:text="00815224"
+            android:textSize="12dp"
             android:background="@drawable/underline_dashed"/>
 
         <TextView
@@ -101,8 +108,14 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.1"
-            android:text="TextView"/>
+            android:layout_weight="0.1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.14"
+            android:text="注意事項："
+            android:textSize="11dp"/>
 
         <TextView
             android:id="@+id/lastResultRe_Notice_tv"

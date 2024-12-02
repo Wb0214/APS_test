@@ -1,5 +1,7 @@
 package com.example.aps_test.instance;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,9 +24,11 @@ public class GetCurrentStageData {
 
     public void setCurrentStageArrayList(ArrayList arrayList){
         this.arrayList = arrayList;
+        Log.d("setCurrentStageArrayList", "setCurrentStageArrayList: "+arrayList);
     }
 
     public ArrayList getCurrentStageArrayList(){
+        Log.d("getCurrentStageArrayList", "getCurrentStageArrayList: "+arrayList);
         return arrayList;
     }
 }

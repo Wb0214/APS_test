@@ -1,5 +1,7 @@
 package com.example.aps_test.instance;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,9 +24,11 @@ public class GetAfterData {
 
     public void setAfterArrayList(ArrayList arrayList){
         this.arrayList = arrayList;
+        Log.d("setAfterArrayList", "setAfterArrayList: "+arrayList);
     }
 
     public ArrayList getAfterArrayList(){
+        Log.d("getAfterArrayList", "getAfterArrayList: "+arrayList);
         return arrayList;
     }
 

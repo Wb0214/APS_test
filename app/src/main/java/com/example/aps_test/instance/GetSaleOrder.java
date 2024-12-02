@@ -1,5 +1,7 @@
 package com.example.aps_test.instance;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,9 +24,11 @@ public class GetSaleOrder {
 
     public void setSaleOrderArrayList(ArrayList arrayList){
         this.SaleOrderArrayList = arrayList;
+        Log.d("setSaleOrderArrayList", "setSaleOrderArrayList: "+arrayList);
     }
 
     public ArrayList getSaleOrderArrayList(){
+        Log.d("getSaleOrderArrayList", "getSaleOrderArrayList: "+SaleOrderArrayList);
         return SaleOrderArrayList;
     }
 }

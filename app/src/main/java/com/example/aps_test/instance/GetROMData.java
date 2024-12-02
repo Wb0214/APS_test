@@ -28,6 +28,7 @@ public class GetROMData {
     }
 
     public ArrayList getROMArrayList(){
+        Log.e("GetROMData", "getROMArrayList: " + ROMArrayList);
         return ROMArrayList;
     }
 

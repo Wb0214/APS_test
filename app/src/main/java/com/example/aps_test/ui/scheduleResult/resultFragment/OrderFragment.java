@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.APS_test.R;
+import com.example.aps_test.instance.GetSaleOrder;
 import com.example.aps_test.ui.scheduleResult.resultFragment.resultAdapter.OrderAdapter;
 
 import java.util.ArrayList;
@@ -26,6 +29,9 @@ public class OrderFragment extends Fragment {
     private Context context;
     private RecyclerView OrderRecyclerView;
     OrderAdapter orderAdapter;
+    private GetSaleOrder getSaleOrder;
+    private TextView MoIdTextView, SoIdTextView, ItemIdTextView,
+            ItemNameTextView,quantityTextView,startTimeTextView, finishTimeTextView;
 
     ArrayList<HashMap<String, String>> marrayList = new ArrayList<>();
 
@@ -60,6 +66,17 @@ public class OrderFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         OrderRecyclerView = view.findViewById(R.id.order_list_tv);
+        MoIdTextView = view.findViewById(R.id.before_Moid_tv);
+        SoIdTextView = view.findViewById(R.id.before_Soid_tv);
+        ItemIdTextView = view.findViewById(R.id.before_itemId_tv);
+        ItemNameTextView = view.findViewById(R.id.before_ItemName_tv);
+        quantityTextView = view.findViewById(R.id.before_Qty_tv);
+        startTimeTextView = view.findViewById(R.id.before_StartTime_tv);
+        finishTimeTextView = view.findViewById(R.id.before_EndTime_tv);
+
+        getSaleOrder = GetSaleOrder.getInstance();
+        marrayList = getSaleOrder.getSaleOrderArrayList();
+        Log.d("OrderFragment", "onViewCreated: "+marrayList);
 
         OrderRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         OrderRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
